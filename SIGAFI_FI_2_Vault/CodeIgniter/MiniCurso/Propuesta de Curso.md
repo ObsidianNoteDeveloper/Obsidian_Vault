@@ -1,0 +1,32 @@
+
+- **Módulo 1 – Introducción a CodeIgniter 4**
+    - ¿Qué es un framework?
+    - Arquitectura MVC
+    - Estructura de carpetas
+    - Flujo de una petición
+    - Primer proyecto
+- **Módulo 2 – Rutas (Routing)**
+    - Definición de rutas
+    - Parámetros
+    - Métodos GET y POST
+    - Grupos de rutas
+- **Módulo 3 – Controladores**
+    - Crear controladores
+    - Métodos
+    - Respuestas
+    - Helpers
+- **Módulo 4 – Vistas**
+    - HTML + PHP
+    - Variables
+    - Layouts
+    - Secciones
+    - Componentes
+- **Módulo 5 – Modelos y Base de Datos**
+    - Conexión
+    - CRUD
+    - Query Builder
+    - Migraciones
+    - Seeders
+- **Módulo 6 – Formularios y Validaciones**
+- **Módulo 7 – Sesiones y Autenticación**
+- **Módulo 8 – Proyecto completo**, aplicando todo lo aprendido.
