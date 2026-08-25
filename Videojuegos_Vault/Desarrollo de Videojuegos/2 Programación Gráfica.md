@@ -1,0 +1,1 @@
+Este segundo capitulo, se centra en los algoritmos y técnicas de representación gráfica y optimizaciones en sistemas de despliegue interactivo.
