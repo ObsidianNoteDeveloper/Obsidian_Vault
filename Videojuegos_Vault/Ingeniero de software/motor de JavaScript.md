@@ -1,0 +1,12 @@
+
+# motor V8
+
+Google Chrome utiliza un motor de JavaScript llamado V8. Un motor de JavaScript es el componente encargado de leer, interpretar y ejecutar el código escrito por el programador dentro del navegador. V8 fue desarrollado por Google y es conocido por su gran velocidad y eficiencia. Este motor convierte el código JavaScript en instrucciones optimizadas que la computadora puede ejecutar rápidamente, lo que permite cargar aplicaciones web complejas, videojuegos y plataformas interactivas con un alto rendimiento. Además, V8 no solo funciona dentro de Chrome, sino también en tecnologías como Node.js, permitiendo ejecutar JavaScript fuera del navegador y haciendo posible el desarrollo FullStack con un solo lenguaje.
+
+# SpiderMonkey
+
+Mozilla Firefox utiliza un motor llamado SpiderMonkey, desarrollado por Mozilla Foundation. SpiderMonkey fue uno de los primeros motores de JavaScript creados en la historia de la web y ha evolucionado constantemente para adaptarse a los estándares modernos de ECMAScript. Su función principal es interpretar y ejecutar código JavaScript de manera eficiente dentro del navegador Firefox. Este motor incorpora técnicas modernas de optimización y administración de memoria para mejorar la velocidad de ejecución de aplicaciones web. Gracias a SpiderMonkey, Firefox puede manejar páginas dinámicas, videojuegos en navegador y aplicaciones complejas manteniendo compatibilidad con las nuevas características del lenguaje.
+
+# JavaScriptCore
+
+Safari utiliza el motor JavaScriptCore, desarrollado por Apple. Este motor fue diseñado especialmente para integrarse con el ecosistema de Apple y optimizar el rendimiento de JavaScript en dispositivos como Mac, iPhone y iPad. JavaScriptCore se encarga de ejecutar el código JavaScript dentro del navegador Safari de forma rápida y eficiente, permitiendo que las páginas web respondan inmediatamente a las acciones del usuario. Además de utilizarse en Safari, este motor también forma parte de otros componentes internos de los sistemas operativos de Apple. Gracias a JavaScriptCore, las aplicaciones web y videojuegos ejecutados en Safari pueden ofrecer animaciones fluidas, interactividad y una experiencia optimizada en dispositivos móviles y computadoras de Apple.
