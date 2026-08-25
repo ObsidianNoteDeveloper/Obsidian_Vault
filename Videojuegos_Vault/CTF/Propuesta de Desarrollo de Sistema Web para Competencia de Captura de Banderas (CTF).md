@@ -24,7 +24,7 @@ En un **Scratch CTF** los jugadores pueden enfrentarse a retos como:
 - Resolver rompecabezas de programación.
 
 <div style="text-align: center;">  
-<img src="ScratchHolmes.png" width="250">  
+<img src="img/ScratchHolmes.png" width="250">
 </div>
 
 ---
