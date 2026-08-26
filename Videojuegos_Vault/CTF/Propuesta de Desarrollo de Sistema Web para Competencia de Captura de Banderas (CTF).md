@@ -47,13 +47,13 @@ Dentro de las llaves se incluirá un identificador correspondiente al reto y la 
 Para el desarrollo del CTF se habilitará un sitio web que contendrá múltiples videojuegos desarrollados en **Scratch**. Cada juego representará múltiples retos que los participantes deberán analizar para localizar algunas banderas.
 
 <div style="text-align: center;">  
-<img src="Pasted image 20260813164307.png" width="750">  
+<img src="img/Pasted image 20260813164307.png" width="750">  
 </div>
 
 En la parte inferior de cada juego se incluirá un icono de **Scratch**. Al seleccionar dicho icono, el participante será redirigido a la página oficial de Scratch donde se encuentra publicado el proyecto.
 
 <div style="text-align: center;">  
-<img src="Pasted image 20260813164528.png" width="550">  
+<img src="img/Pasted image 20260813164528.png" width="550">  
 </div>
 
 Una vez dentro del proyecto, el participante deberá seleccionar la opción **“Ver adentro”**. Esto permitirá visualizar todos los bloques de programación utilizados para desarrollar el videojuego y analizar su funcionamiento en busca de las banderas correspondientes.
