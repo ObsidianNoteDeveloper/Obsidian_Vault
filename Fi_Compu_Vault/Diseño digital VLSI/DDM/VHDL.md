@@ -477,41 +477,239 @@ Una forma sencilla de recordarlo:
 - Cuando llegue a 23 horas con 59 minutos, se volverá a empezar la cuanta 
 
 ```VHDL
--- ================================================================
--- RELOJ DIGITAL
--- ================================================================
--- Este programa implementa un reloj digital utilizando cuatro
--- displays de 7 segmentos.
---
--- Los displays representan:
---
--- display1 -> Unidades de minutos
--- display2 -> Decenas de minutos
--- display3 -> Unidades de horas
--- display4 -> Decenas de horas
---
--- La cuenta que se pretende obtener es:
---
---             HH:MM
---
--- Por ejemplo:
---             12:37
---
--- El reloj debe avanzar:
---
+library IEEE;
+use IEEE.std_logic_1164.ALL;
+use IEEE.std_logic_arith.ALL;
+use IEEE.std_logic_unsigned.ALL;
+
+entity relojdigital is
+
+    Port (
+        reloj : in std_logic;
+        display1, display2, display3, display4 :
+            out std_logic_vector(6 downto 0)
+    );
+
+end relojdigital;
+
+architecture Behavioral of relojdijital is
+
+    signal segundo, N, E, auxiliar, Z : STD_LOGIC;
+    signal U, D, H1, H2 :
+        std_logic_vector(3 downto 0) := "0000";
+		  
+Begin
+
+    Divisor : process(reloj)
+
+        variable cuenta : std_logic_vector(27 downto 0)
+            := X"0000000";
+
+    begin
+
+        if rising_edge(reloj) then
+            if cuenta = X"48009E0" then
+                cuenta := X"0000000";
+
+            else
+                cuenta := cuenta + 1;
+
+            end if;
+
+        end if;
+        segundo <= cuenta(22);
+
+    end process;
+
+    Unidades : process(segundo)
+
+        variable cuenta : std_logic_vector(3 downto 0)
+            := "0000";
+
+    begin
+
+        if rising_edge(segundo) then
+            if cuenta = "1001" then
+                cuenta := "0000";
+                N <= '1';
+
+            else
+                cuenta := cuenta + 1;
+                N <= '0';
+
+            end if;
+
+        end if;
+        U <= cuenta;
+
+    end process;
+
+    Decenas : process(N)
+
+        variable cuenta : std_logic_vector(3 downto 0)
+            := "0000";
+
+    begin
+        if rising_edge(N) then
+            if cuenta = "0101" then
+                cuenta := "0000";
+                E <= '1';
+
+            else
+                cuenta := cuenta + 1;
+                E <= '0';
+            end if;
+
+        end if;
+        D <= cuenta;
+
+    end process;
+
+    HU : process(E)
+
+        variable cuenta : std_logic_vector(3 downto 0)
+            := "0000";
+
+    begin
+
+        if rising_edge(E) then
+
+            if cuenta = "1001" then
+                cuenta := "0000";
+                Z <= '1';
+                AUX <= '0';
+
+            elsif H1 = "0011" AND H2 = "0010" then
+                cuenta := "0000";
+                AUX <= '1';
+                Z <= '1';
+
+            else
+                cuenta := cuenta + 1;
+                Z <= '0';
+                AUX <= '0';
+
+            end if;
+
+        end if;
+        H1 <= cuenta;
+
+    end process;
+
+    HD : process(Z)
+
+        variable cuenta : std_logic_vector(3 downto 0)
+            := "0000";
+
+    begin
+
+        if rising_edge(Z) then
+            if AUX = '1' then
+                cuenta := "0000";
+
+            else
+                cuenta := cuenta + 1;
+
+            end if;
+
+        end if;
+        H2 <= cuenta;
+
+    end process;
+
+
+    with U select
+        display1 <=
+            "1000000" when "0000", -- 0
+            "1111001" when "0001", -- 1
+            "0100100" when "0010", -- 2
+            "0110000" when "0011", -- 3
+            "0011001" when "0100", -- 4
+            "0010010" when "0101", -- 5
+            "0000010" when "0110", -- 6
+            "1111000" when "0111", -- 7
+            "0000000" when "1000", -- 8
+            "0010000" when "1001", -- 9
+            "1000000" when others; -- 0
+
+
+    with D select
+        display2 <=
+            "1000000" when "0000", -- 0
+            "1111001" when "0001", -- 1
+            "0100100" when "0010", -- 2
+            "0110000" when "0011", -- 3
+            "0011001" when "0100", -- 4
+            "0010010" when "0101", -- 5
+            "0000010" when "0110", -- 6
+            "1111000" when "0111", -- 7
+            "0000000" when "1000", -- 8
+            "0010000" when "1001", -- 9
+            "1000000" when others; -- 0
+
+
+    with H1 select
+        display3 <=
+            "1000000" when "0000", -- 0
+            "1111001" when "0001", -- 1
+            "0100100" when "0010", -- 2
+            "0110000" when "0011", -- 3
+            "0011001" when "0100", -- 4
+            "0010010" when "0101", -- 5
+            "0000010" when "0110", -- 6
+            "1111000" when "0111", -- 7
+            "0000000" when "1000", -- 8
+            "0010000" when "1001", -- 9
+            "1000000" when others; -- 0
+
+
+
+    with H2 select
+        display4 <=
+            "1000000" when "0000", -- 0
+            "1111001" when "0001", -- 1
+            "0100100" when "0010", -- 2
+            "0110000" when "0011", -- 3
+            "0011001" when "0100", -- 4
+            "0010010" when "0101", -- 5
+            "0000010" when "0110", -- 6
+            "1111000" when "0111", -- 7
+            "0000000" when "1000", -- 8
+            "0010000" when "1001", -- 9
+            "1000000" when others; -- 0
+
+
+end Behavioral;
+```
+
+
+### RELOJ DIGITAL
+
+Displays de 7 segmentos.
+
+Los displays representan:
+
+- display1 -> Unidades de minutos
+- display2 -> Decenas de minutos
+- display3 -> Unidades de horas
+- display4 -> Decenas de horas
+
+La cuenta que se pretende obtener es:  `HH:MM` 
+
+Por ejemplo: `12:37` 
+
+El reloj debe avanzar:
+
 --             00:00
 --             00:01
 --             ...
 --             23:59
 --             00:00
---
--- ================================================================
 
 
--- ================================================================
--- 1. LIBRERÍAS
--- ================================================================
+#### 1. LIBRERÍAS
 
+```VHDL
 library IEEE;
 
 -- Permite utilizar std_logic y std_logic_vector.
@@ -523,18 +721,17 @@ use IEEE.std_logic_arith.ALL;
 -- Permite realizar operaciones aritméticas y comparaciones
 -- entre vectores std_logic_vector.
 use IEEE.std_logic_unsigned.ALL;
+```
+
+#### 2. ENTIDAD
+
+La entidad representa la interfaz externa del circuito.
+
+Aquí se declaran las entradas y salidas que posteriormente
+podrán asociarse con los pines físicos de la FPGA mediante el Pin Planner de Quartus.
 
 
--- ================================================================
--- 2. ENTIDAD
--- ================================================================
--- La entidad representa la interfaz externa del circuito.
---
--- Aquí se declaran las entradas y salidas que posteriormente
--- podrán asociarse con los pines físicos de la FPGA mediante
--- el Pin Planner de Quartus.
--- ================================================================
-
+```VHDL
 entity relojdigital is
 
     Port (

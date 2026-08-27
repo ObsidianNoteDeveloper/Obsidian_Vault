@@ -22,23 +22,30 @@ Formato de las siguientes banderas en este videojuego: `PiLARES{CB_...}`
 
 `Acertijos (A):`
 
-1. **Acertijo:**  
+6. **Acertijo:**  
     Si un personaje pierde todos sus puntos de vida, normalmente ocurre esto. ¿Qué soy?  
     **Respuesta:** PiLARES{CB_game over}
-2. **Acertijo:**  
+7. **Acertijo:**  
     Me buscas en un CTF y encontrarme puede darte puntos. ¿Qué soy?  
     **Respuesta:** PiLARES{CB_bandera}
-3. **Acertijo:**  
+8. **Acertijo:**  
     Sirvo para saber cuántos puntos ha conseguido un jugador. ¿Qué soy?  
     **Respuesta:** PiLARES{CB_puntaje}
-4. **Acertijo:**  
+9. **Acertijo:**  
     Soy un error en el programa que puede hacer que el juego no funcione como esperas. ¿Qué soy?  
     **Respuesta:** PiLARES{CB_bug}
-5. **Acertijo:**  
+10. **Acertijo:**  
     Cuando encuentro y corrijo un error en mi programa, estoy haciendo esto. ¿Qué soy?  
     **Respuesta:** PiLARES{CB_depurar}
 
 `Lógicas (L):` 
+
+11. PiLARES{CB_...}
+12. PiLARES{CB_...}
+13. PiLARES{CB_...}
+14. PiLARES{CB_...}
+15. PiLARES{CB_...}
+
 
 ## BallsTwo CTF
 
