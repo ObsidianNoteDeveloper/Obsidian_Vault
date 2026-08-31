@@ -4,7 +4,7 @@
 - [[#Capa 1 del Modelo OSI]]
 	- [[#Capa 1 del Modelo OSI]]
 		- [[#Cable UTP]]
-		- [[#Cable STP]]
+- [[#Reporte]]
 
 
 
@@ -71,9 +71,31 @@ Existen dos normas universales:
 
 ---
 
-### Cable STP
+# Reporte
+
+**¿Cuál es la diferencia que existe al emplear (no al construir) el código de colores T568\-A y T568-B dentro del cableado estructurado?**
+
+La principal diferencia entre ambos es el intercambio de los pares verde y naranja
 
 
+**Investigue la configuración para un cable cruzado en redes de tipo Gigabit Ethernet**
+
+Para un cable cruzado, empleamos el estándar T568-A en un extremo y T568-B en el otro extremo, donde se produce el cruce de los pares verde y naranja
+
+**Conclusión**
+
+La construcción de cables UTP permite comprender de manera práctica el funcionamiento de la **Capa Física del modelo OSI**, ya que el orden de los conductores determina cómo se establecen las conexiones eléctricas entre los dispositivos de una red.
+
+Es importante entender que los estándares **T568A y T568B** no representan diferentes categorías de cable, sino diferentes formas de organizar los conductores dentro de un conector RJ45. Utilizar el mismo estándar en ambos extremos produce un cable directo, mientras que utilizar T568A en un extremo y T568B en el otro produce un cable cruzado.
+
+
+**Bibliografia en formato APA**
+
+Cisco Systems. (2026). _Configuración y verificación de la negociación automática de semidúplex/dúplex completo de Ethernet 10/100/1000 Mb
+
+Cisco Systems. (2006). _Especificaciones de los cables Ethernet 100BaseTX y 10BaseT
+
+Cisco Systems. (2019). _Cisco Catalyst 1000 Series Switch Hardware Installation Guide
 
 
 
