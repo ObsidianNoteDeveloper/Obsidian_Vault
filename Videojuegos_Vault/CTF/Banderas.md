@@ -40,133 +40,168 @@ Formato de las siguientes banderas en este videojuego: `PiLARES{CB_...}`
 
 `Lógicas (L):` 
 
-11. PiLARES{CB_...}
-12. PiLARES{CB_...}
-13. PiLARES{CB_...}
-14. PiLARES{CB_...}
-15. PiLARES{CB_...}
+11. PiLARES{CB_3}
+12. PiLARES{CB_Ghost}
+13. PiLARES{CB_0}
+14. PiLARES{CB_95}
+15. PiLARES{CB_PLAY}
 
 
 ## BallsTwo CTF
 
 `Escondidas (E):`
 
-6. PiLARES{decir}
-7. PiLARES{mover}
-8. PiLARES{escenario}
-9. PiLARES{disfraz}
-10. PiLARES{sonido}
+16. PiLARES{decir}
+17. PiLARES{mover}
+18. PiLARES{escenario}
+19. PiLARES{disfraz}
+20. PiLARES{sonido}
 
 Formato de las siguientes banderas en este videojuego: `PiLARES{BT_...}` 
 
 `Acertijos (A):`
 
-6. **Acertijo:**  
+21. **Acertijo:**  
     Soy el personaje que puedes programar para caminar, saltar o hablar. ¿Qué soy?  
     **Respuesta:** PiLARES{BT_sprite}
-7. **Acertijo:**  
+22. **Acertijo:**  
     Soy el lugar donde ocurre tu juego y puedo cambiar de escenario. ¿Qué soy?  
     **Respuesta:** PiLARES{BT_escenario}
-8. **Acertijo:**  
+23. **Acertijo:**  
     Soy una pieza de Scratch que contiene una instrucción. ¿Qué soy?  
     **Respuesta:** PiLARES{BT_bloque}
-9. **Acertijo:**  
+24. **Acertijo:**  
     Cuando hago clic en la bandera verde, ¡comienza la aventura! ¿Qué soy?  
     **Respuesta:** PiLARES{BT_bandera verde}
-10. **Acertijo:**  
+25. **Acertijo:**  
     Sirvo para guardar un número o una palabra que puede cambiar durante el juego. ¿Qué soy?  
     **Respuesta:** PiLARES{BT_variable}
+
+`Lógicas (L):` 
+
+26. PiLARES{BT_Soccer Ball}
+27. PiLARES{BT_15}
+28. PiLARES{BT_VidasRojo}
+29. PiLARES{BT_start}
+30. PiLARES{BT_mensaje1}
+
 
 ## DinoDisparo055
 
 `Escondidas (E):`
 
-11. PiLARES{esperar}
-12. PiLARES{booleano}
-13. PiLARES{bucle}
-14. PiLARES{condicion}
-15. PiLARES{algoritmo}
+31. PiLARES{esperar}
+32. PiLARES{booleano}
+33. PiLARES{bucle}
+34. PiLARES{condicion}
+35. PiLARES{algoritmo}
 
 Formato de las siguientes banderas en este videojuego: `PiLARES{DD_...}` 
 
 `Acertijos (A):`
 
-11. **Acertijo:**  
+36. **Acertijo:**  
     Si quiero que un personaje diga algo, ¿qué bloque puedo usar?  
     **Respuesta:** PiLARES{DD_decir}
-12. **Acertijo:**  
+37. **Acertijo:**  
     Si quiero que mi personaje avance, ¿qué debe hacer?  
     **Respuesta:** PiLARES{DD_mover}
-13. **Acertijo:**  
+38. **Acertijo:**  
     Soy el lugar donde aparecen los personajes de tu juego. ¿Qué soy?  
     **Respuesta:** PiLARES{DD_escenario}
-14. **Acertijo:**  
+39. **Acertijo:**  
     Puedo hacer que un personaje se vea diferente. ¿Qué soy?  
     **Respuesta:** PiLARES{DD_disfraz}
-15. **Acertijo:**  
+40. **Acertijo:**  
     Si quiero que mi personaje emita un sonido, ¿qué puedo usar?  
     **Respuesta:** PiLARES{DD_sonido}
 
+`Lógicas (L):` 
 
+41. PiLARES{DD_DinoVida}
+42. PiLARES{DD_SpriteX}
+43. PiLARES{DD_80}
+44. PiLARES{DD_You Win}
+45. PiLARES{DD_1}
+
+==Me quede en Nave==
 ## NaveEspacial055 CTF
 
 `Escondidas (E):`
 
-16. PiLARES{cadena}
-17. PiLARES{operador}
-18. PiLARES{aparicion}
-19. PiLARES{comando}
-20. PiLARES{evento}
+46. PiLARES{cadena}
+47. PiLARES{operador}
+48. PiLARES{aparicion}
+49. PiLARES{comando}
+50. PiLARES{evento}
 
 Formato de las siguientes banderas en este videojuego: `PiLARES{NE_...}`
 
 `Acertijos (A):`
 
-16. **Acertijo:**  
+51. **Acertijo:**  
     Soy una instrucción que permite que un personaje espere antes de continuar. ¿Qué soy?  
 	**Respuesta:** PiLARES{NE_esperar}
-17. **Acertijo:**  
+52. **Acertijo:**  
     Puedo tener solamente dos respuestas: verdadero o falso. ¿Qué soy?  
     **Respuesta:** PiLARES{NE_booleano}
-18. **Acertijo:**  
+53. **Acertijo:**  
     Sirvo para repetir una acción muchas veces sin escribirla de nuevo. ¿Qué soy?  
     **Respuesta:** PiLARES{NE_bucle}
-19. **Acertijo:**  
+54. **Acertijo:**  
     Si una condición se cumple, hago una acción. Si no, puedo hacer otra. ¿Qué soy?  
     **Respuesta:** PiLARES{NE_condición}
-20. **Acertijo:**  
+55. **Acertijo:**  
     Soy un conjunto de instrucciones que la computadora sigue para resolver un problema. ¿Qué soy?  
     **Respuesta:** PiLARES{NE_algoritmo}
+
+`Lógicas (L):` 
+
+56. PiLARES{NE_...}
+57. PiLARES{NE_...}
+58. PiLARES{NE_...}
+59. PiLARES{NE_...}
+60. PiLARES{NE_...}
+
 
 ## Escape del Murciélago CTF
 
 `Escondidas (E):`
 
-21. PiLARES{game_over}
-22. PiLARES{bandera}
-23. PiLARES{puntaje}
-24. PiLARES{bug}
-25. PiLARES{depurar}
+61. PiLARES{game_over}
+62. PiLARES{bandera}
+63. PiLARES{puntaje}
+64. PiLARES{bug}
+65. PiLARES{depurar}
 
 Formato de las siguientes banderas en este videojuego: `PiLARES{EM_...}` 
 
 `Acertijos (A):`
 
-21. **Acertijo:**  
+66. **Acertijo:**  
     Soy una palabra o conjunto de caracteres que sirve para guardar texto. ¿Qué soy?  
     **Respuesta:** PiLARES{EM_cadena}
-22. **Acertijo:**  
+67. **Acertijo:**  
     Sirvo para sumar, restar, multiplicar o dividir. ¿Qué soy?  
     **Respuesta:** PiLARES{EM_operador}
-23. **Acertijo:**  
+68. **Acertijo:**  
 	Soy el lugar donde un personaje puede aparecer o desaparecer dentro del juego. ¿Qué soy?  
 	**Respuesta:** PiLARES{EM_aparición}
-24. **Acertijo:**  
+69. **Acertijo:**  
     Soy una instrucción que le dice a la computadora qué debe hacer. ¿Qué soy?  
     **Respuesta:** PiLARES{EM_comando}
-25. **Acertijo:**  
+70. **Acertijo:**  
     Cuando algo ocurre y hace que el programa responda, soy yo. Por ejemplo, hacer clic en un botón. ¿Qué soy?  
     **Respuesta:** PiLARES{EM_evento}
+
+`Lógicas (L):` 
+
+71. PiLARES{EM_...}
+72. PiLARES{EM_...}
+73. PiLARES{EM_...}
+74. PiLARES{EM_...}
+75. PiLARES{EM_...}
+
 
 ---
 
