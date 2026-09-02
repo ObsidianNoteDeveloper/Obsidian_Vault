@@ -29,3 +29,6 @@ Su función principal es iniciar y preparar el hardware de la computadora antes 
 - Busca **Inicio avanzado**.
 - Pulsa **Reiniciar ahora**.
 
+Solucionar problemas -> Opciones avanzadas -> Configuración de firmware UEFI -> Reinicias
+
+
