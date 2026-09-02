@@ -1,6 +1,6 @@
 
-- [[#Práctica 1]]
-- [[#Práctica 12]]
+[Práctica 1](#Práctica%201)
+[Práctica 12](#Práctica%2012)
 
 
 
