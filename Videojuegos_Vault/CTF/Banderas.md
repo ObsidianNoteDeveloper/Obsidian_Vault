@@ -124,7 +124,6 @@ Formato de las siguientes banderas en este videojuego: `PiLARES{DD_...}`
 44. PiLARES{DD_You Win}
 45. PiLARES{DD_1}
 
-==Me quede en Nave==
 ## NaveEspacial055 CTF
 
 `Escondidas (E):`
@@ -205,7 +204,7 @@ Formato de las siguientes banderas en este videojuego: `PiLARES{EM_...}`
 75. PiLARES{EM_mensaje1}
 
 
-
+==Termine de esconder las banderas==
 
 ---
 
