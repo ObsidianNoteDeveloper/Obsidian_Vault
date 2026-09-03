@@ -26,7 +26,7 @@ Las personas participantes pondrán en práctica sus conocimientos para:
 - Encontrar información oculta dentro de videojuegos.
 - Resolver acertijos y rompecabezas.
 - Desarrollar estrategias para superar diferentes desafíos.
-- Aplicar el razonamiento lógico y la creatividad para encontrar las banderas.
+- Aplicar el razonamiento **lógico** y la **creatividad** para encontrar las banderas.
 
 ---
 
@@ -65,7 +65,7 @@ Para participar en el Scratch CTF se recomienda contar con conocimientos básico
 - Lógica de programación.
 - Resolución de problemas.
 
-**No es necesario contar con conocimientos especializados en ciberseguridad.**
+**No es necesario contar con conocimientos especializados.**
 
 Los retos estarán diseñados principalmente para poner a prueba conocimientos de programación, lógica, observación y pensamiento computacional.
 
