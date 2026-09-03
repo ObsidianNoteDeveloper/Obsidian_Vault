@@ -1,7 +1,7 @@
 
 ## Índice
 
-- [Introducción a las redes de datos](#introducción-a-las-redes-de-datos)
+- [Introducción a las redes de datos](#introducción-a-las-redes-de-datos)[.](#Conceptos%20básicos)
 - [Conceptos básicos](#conceptos-básicos)
 - [Tipos de Topología](#tipos-de-topología)
 
