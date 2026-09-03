@@ -157,14 +157,16 @@ Formato de las siguientes banderas en este videojuego: `PiLARES{NE_...}`
 
 `Lógicas (L):` 
 
-56. PiLARES{NE_...}
-57. PiLARES{NE_...}
-58. PiLARES{NE_...}
-59. PiLARES{NE_...}
-60. PiLARES{NE_...}
+56. PiLARES{NE_10}
+57. PiLARES{NE_vidas}
+58. PiLARES{NE_estrellas}
+59. PiLARES{NE_pregunta1}
+60. PiLARES{NE_0.4}
 
 
 ## Escape del Murciélago CTF
+
+Formato de bandera: PiLARES{EM_...}
 
 `Escondidas (E):`
 
@@ -196,11 +198,13 @@ Formato de las siguientes banderas en este videojuego: `PiLARES{EM_...}`
 
 `Lógicas (L):` 
 
-71. PiLARES{EM_...}
-72. PiLARES{EM_...}
-73. PiLARES{EM_...}
-74. PiLARES{EM_...}
-75. PiLARES{EM_...}
+71. PiLARES{EM_0}
+72. PiLARES{EM_0.3}
+73. PiLARES{EM_time}
+74. PiLARES{EM_game over}
+75. PiLARES{EM_mensaje1}
+
+
 
 
 ---
