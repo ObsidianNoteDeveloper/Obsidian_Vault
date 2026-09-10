@@ -3,13 +3,13 @@
 
 Escuela de Videojuegos integraría programación, arte, diseño, narrativa, música, producción y conocimientos técnicos para construir experiencias interactivas completas.
 
-Un videojuego es un producto multidisciplinario, para desarrollar uno se necesitan, dependiendo del proyecto:
+Un videojuego es un producto multidisciplinario, que requiere para el desarrollo, múltiples áreas de conocimiento, dependiendo del proyecto podemos desglosar los siguientes requisitos:
 
 <div style="text-align: center;">  
 <img src="VideojuegosRequerimientos.png" width="900">  
 </div>
 
-Escuela de Videojuegos puede convertirse en un proyecto transversal de PiLARES, los talleres existentes se conectan para generar un producto completo.
+Escuela de Videojuegos puede convertirse en un proyecto transversal de PiLARES, se busca que los talleres existentes se conecten para generar un producto completo.
 
 
 # Estructura del PiLARES
