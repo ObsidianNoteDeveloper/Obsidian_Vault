@@ -1,5 +1,6 @@
+# Escuela de Videojuegos PiLARES
 
-**Escuela de Videojuegos PILARES** es un espacio dentro de PILARES, destinado a que niñas, niños, jóvenes y personas adultas puedan **aprender el proceso completo de creación de un videojuego**, desde la idea inicial hasta un producto jugable.
+Escuela de Videojuegos PILARES es un espacio dentro de PILARES, destinado a que niñas, niños, jóvenes y personas adultas puedan aprender el proceso completo de creación de un videojuego, desde la idea inicial hasta un producto jugable.
 
 Escuela de Videojuegos integraría programación, arte, diseño, narrativa, música, producción y conocimientos técnicos para construir experiencias interactivas completas.
 
@@ -7,6 +8,9 @@ Un videojuego es un producto multidisciplinario, que requiere para el desarrollo
 
 <div style="text-align: center;">  
 <img src="VideojuegosRequerimientos.png" width="900">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 1</b>. Abstracción de un videojuego.
 </div>
 
 Escuela de Videojuegos puede convertirse en un proyecto transversal de PiLARES, se busca que los talleres existentes se conecten para generar un producto completo.
@@ -57,9 +61,11 @@ Crear proyectos que involucren a la comunidad y fortalezcan el sentido de perten
 Acercar a los participantes a las metodologías, herramientas y prácticas utilizadas en el desarrollo profesional de videojuegos.
 
 <div style="text-align: center;">  
-<img src="PiLARESVideojuegos.png" width="700">  
+<img src="PiLARESVideojuegos.png" width="500">  
 </div>
-
+<div style="text-align: center; color: #555555;">
+<b>Imagen 2</b>. Áreas y talleres que se pueden integrar en un videojuego.
+</div>
 
 ## Plan de trabajo durante etapa piloto
 
@@ -75,11 +81,18 @@ Acercar a los participantes a las metodologías, herramientas y prácticas utili
 
 # LÍNEA FORMATIVA: Desarrollo de videojuegos
 
-La línea formativa de desarrollo de **Videojuegos** esta estructurada como una ruta progresiva de aprendizaje, el modelo parte de una formación común para todos los participantes y, posteriormente, permite elegir diferentes especializaciones tecnológicas
+La línea formativa de desarrollo de Videojuegos esta estructurada como una ruta progresiva de aprendizaje, el modelo parte de una formación común para todos los participantes y, posteriormente, permite elegir diferentes especializaciones tecnológicas
 
 La propuesta se divide en dos grandes etapas:
 - Tronco común
 - Rutas de aprendizaje especializadas 
+
+<div style="text-align: center;">  
+<img src="LineaFormativa.jpeg" width="900">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 3</b>. Linea formativa propuesta por PiLARES.
+</div>
 
 # Tronco común
 
@@ -91,7 +104,7 @@ Es la etapa de introducción que busca proporcionar los conocimientos necesarios
 
 ### Módulo 1: Fundamentos para Creadores de Videojuegos 
 
-Una vez adquiridas las bases digitales y lógicas, el participante se introduce específicamente al **desarrollo de videojuegos**. Este módulo busca comprender que un videojuego no consiste únicamente en escribir código, sino que requiere diferentes elementos como diseño de videojuegos, mecánicas, personajes, escenarios entre otros, de esta manera, el usuario comprenderá como se concibe y estructura un videojuego antes de profundizar en una tecnología en específica.
+Una vez adquiridas las bases digitales y lógicas, el participante se introduce específicamente al desarrollo de videojuegos. Este módulo busca comprender que un videojuego no consiste únicamente en escribir código, sino que requiere diferentes elementos como diseño de videojuegos, mecánicas, personajes, escenarios entre otros, de esta manera, el usuario comprenderá como se concibe y estructura un videojuego antes de profundizar en una tecnología en específica.
 
 ### Módulo 2: Programación Orientada a Objetos para Videojuegos (POO)
 
@@ -100,7 +113,7 @@ Este módulo introduce los fundamentos de la programación orientada a objetos, 
 
 # Rutas de aprendizaje
 
-Después del tronco común, el usuario puede continuar por diferentes **rutas de aprendizaje**, dependiendo del tipo de videojuegos y tecnologías que quiera desarrollar. PiLARES plantea cinco rutas.
+Después del tronco común, el usuario puede continuar por diferentes rutas de aprendizaje, dependiendo del tipo de videojuegos y tecnologías que quiera desarrollar. PiLARES plantea cinco rutas.
 
 ### Ruta 1: JavaScript + Videojuegos Web
 
@@ -108,15 +121,15 @@ Está orientado al desarrollo de videojuegos que funcionen directamente en naveg
 
 ### Ruta 2: Java
 
-Esta ruta utiliza **Java** como lenguaje principal para continuar desarrollando conocimientos de programación y creación de videojuegos.
+Esta ruta utiliza Java como lenguaje principal para continuar desarrollando conocimientos de programación y creación de videojuegos.
 
 ### Ruta 3: Python + Godot
 
-Esta ruta orientada al desarrollo de videojuegos mediante un motor especializado. **Godot** permite trabajar con diferentes elementos propios del desarrollo de videojuegos.
+Esta ruta orientada al desarrollo de videojuegos mediante un motor especializado. Godot permite trabajar con diferentes elementos propios del desarrollo de videojuegos.
 
 ### Ruta 4: XR
 
-La cuarta ruta está enfocada en **Realidad Extendida (XR)**, esta ruta amplía la formación de videojuegos hacia experiencias interactivas e inmersivas.
+La cuarta ruta está enfocada en Realidad Extendida (XR)**, esta ruta amplía la formación de videojuegos hacia experiencias interactivas e inmersivas.
 
 ### Ruta 5: C# + Unity
 
