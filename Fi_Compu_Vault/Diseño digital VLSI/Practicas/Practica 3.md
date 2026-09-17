@@ -599,3 +599,104 @@ GPIO ── 330 Ω ── Cátodo B LED 2
 
              ...
 ```
+
+
+### Entidad leds
+
+```VHDL
+entity leds is
+    Port (
+        reloj_in : in std_logic;
+
+        led1_R, led1_G, led1_B : out std_logic;
+        led2_R, led2_G, led2_B : out std_logic;
+        led3_R, led3_G, led3_B : out std_logic;
+        led4_R, led4_G, led4_B : out std_logic;
+        led5_R, led5_G, led5_B : out std_logic
+    );
+end leds;
+```
+
+Esta parte define qué entra y qué sale de nuestro circuito, tenemos una entrada  `reloj_in` que es el reloj de la FPGA y tenemos 15 salidas.
+
+Al tener 5 leds RGB significa que tendremos 15 leds independientes, recordando que cada led RGB contiene los siguientes colores: rojo, verde y azul.
+
+### Componente divisor
+
+```VHDL
+component divisor is
+    generic (N: integer := 24);
+    port (
+        reloj     : in std_logic;
+        div_reloj : out std_logic
+    );
+end component;
+```
+
+Nuestro programa utilizará un componente llamado `divisor`, como en practicas anteriores, este componente sirve para hacer más lento el reloj. La FPGA trabaja con un reloj muy rápido que para fines prácticos el efecto de rotación de nuestro programa sería demasiado rápido como para poder visualizar el cambio de colores entre leds.
+
+
+### Componente pwm
+
+```VHDL
+component pwm is
+    port (
+        reloj_pwm : in std_logic;
+        D         : in std_logic_vector(7 downto 0);
+        S         : out std_logic
+    );
+end component;
+```
+
+El componente de modulación por ancho de pulso (PWM) es el que nos permite controlar qué tanto se enciende cada uno de los Leds.
+
+Nuestra FPGA nos puede dar dos voltajes, 0V (apagado) y 3.3 o 5 V (encendido), el dilema con solo dos estados es que no podemos pedirle a la tarjeta que nos de 1.5V para un brillo medio, para solucionar esto, el PWM enciende y apaga el LED miles de veces por segundo tan rápido que el ojo humano no nota el parpadeo. Lo que el ojo percibe es un "promedio" de luz.
+- Si el LED pasa más tiempo apagado que encendido, se ve tenue
+- Si el LED pasa más tempo encendido que apagado, se ve brillante.
+
+### Valores de color para los LEDs
+
+```VHDL
+signal rojo1  : std_logic_vector(7 downto 0) := X"EB";
+signal verde1 : std_logic_vector(7 downto 0) := X"27";
+signal azul1  : std_logic_vector(7 downto 0) := X"F5";
+```
+
+Aquí estamos diciendo cuánto brillo tendrá cada uno de los leds del LED RGB.
+
+Los valores en hexadecimal (por ejemplo EB, 27 F5) es la forma en la que le decimos a la FPGA cuanta intensidad queremos en cada led, podemos verlo de la siguiente forma:
+- Rojo: Mucha intensidad de color
+- Verde: Poca intensidad de color
+- Azul: Mucha intensiadad de color, pero ligeramente menor al Rojo
+Esta combinación de los tres colores nos permite ver un color en particular
+
+Este proceso se repite en los otros cuatro leds.
+
+### Declarar y predifinir un color especifico 
+
+```VHDL
+signal rojo1  : std_logic_vector(7 downto 0) := X"EB";
+signal verde1 : std_logic_vector(7 downto 0) := X"27";
+signal azul1  : std_logic_vector(7 downto 0) := X"F5";
+```
+
+Este bloque se encarga de declarar y predefinir un color en específico en formato RGB para el LED, `signal` le indica a la FPGA que está creando "cables internos" o registros de memoria dentro del chip para almacenar y transportar datos entre diferentes componentes.
+
+`std_logic_vector(7 downto 0)` define que no es un pin de un solo bit, sino un bús de 8 bits y el operador `:= X"..."`lo usamos para asignar un valor inicial a las señales al encender la FPGA e indicamos el valor en el sistema hexadecimal
+
+### Instanciación del componente pwm
+
+```VHDL
+P1: pwm port map (relojPWM, rojo1, led1_R); 
+P2: pwm port map (relojPWM, verde1, led1_G); 
+P3: pwm port map (relojPWM, azul1, led1_B);
+```
+
+Estas tres lineas son la instanciación del componente pwm en nuestro programa, lo que hace es crear tres controladores pwd independites (uno para cada color del LED RGB) a partir de un único componente pwd, es donde usamos `port map` para conectar las señales con las patas internas del componente pwm.
+
+
+## Conclusión
+
+
+Esta práctica nos permitió controlar cinco LEDs RGB mediante VHDL y una FPGA, comprendiendo cómo definir sus entradas y salidas dentro de una entidad y cómo utilizar componentes reutilizables como el divisor de frecuencia y el PWM. También se comprendió cómo representar los colores RGB mediante valores de 8 bits y cómo modificar la intensidad de cada color para obtener diferentes tonalidades. Finalmente, mediante la instanciación del PWM, se logró controlar de manera independiente los componentes rojo, verde y azul de cada LED. Con esto, se reforzaron los conocimientos sobre diseño digital, señales, control de brillo y programación de dispositivos FPGA mediante VHDL.
+
