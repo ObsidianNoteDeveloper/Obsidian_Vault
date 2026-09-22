@@ -108,3 +108,29 @@ De esta manera, el proyecto permitirá aplicar de forma práctica conceptos fund
 
 
 
+---
+---
+
+Java + Redes + Linux + SQL + HTTP + Seguridad
+
+**Java aplicado a sistemas**
+
+```
+Java
+ ↓
+Maven
+ ↓
+JUnit
+ ↓
+JDBC
+ ↓
+PostgreSQL
+ ↓
+Sockets
+ ↓
+HTTP
+ ↓
+REST
+```
+
+Perfil buscado: Java Backend Developer con conocimientos de redes, Linux y seguridad.
