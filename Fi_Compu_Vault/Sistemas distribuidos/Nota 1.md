@@ -39,7 +39,9 @@ En Unix/Linux, la llamada al sistema **`fork()`** se utiliza para crear un nuevo
 
 El orden en que aparecen los mensajes de padre e hijo no necesariamente es fijo, porque depende de la planificación realizada por el sistema operativo.
 
-Entre las funciones relacionadas con procesos se encuentran `fork()`, `getpid()`, `getppid()`, `wait()`, `exit()` y `exec()`. `fork()` crea un proceso, `getpid()` obtiene el PID actual, `getppid()` obtiene el PID del padre, `wait()` permite esperar a que termine un proceso hijo, `exit()` finaliza un proceso y `exec()` sustituye el programa que está ejecutando un proceso por otro.
+Entre las funciones relacionadas con procesos se encuentran `fork()`, `getpid()`, `getppid()`, `wait()`, `exit()` y `exec()`. 
+
+`fork()` crea un proceso, `getpid()` obtiene el PID actual, `getppid()` obtiene el PID del padre, `wait()` permite esperar a que termine un proceso hijo, `exit()` finaliza un proceso y `exec()` sustituye el programa que está ejecutando un proceso por otro.
 
 Una combinación particularmente importante es:
 
@@ -55,7 +57,12 @@ Debido a que normalmente existen más procesos que procesadores disponibles, el 
 
 La **planificación** es el mecanismo mediante el cual el sistema operativo decide qué proceso debe utilizar la CPU. El componente encargado de tomar esta decisión se denomina **planificador o scheduler**.
 
-Entre los algoritmos de planificación estudiados se encuentran **FCFS (First Come, First Served)**, **Round Robin**, **Shortest Job First (SJF)**, planificación por **prioridades** y **Multilevel Queue**.
+Entre los algoritmos de planificación estudiados se encuentran 
+- **FCFS (First Come, First Served)**
+- **Round Robin**
+- **Shortest Job First (SJF)**
+- planificación por **prioridades**
+- **Multilevel Queue**
 
 El objetivo de la planificación es aprovechar eficientemente la CPU y proporcionar tiempos de respuesta adecuados.
 
