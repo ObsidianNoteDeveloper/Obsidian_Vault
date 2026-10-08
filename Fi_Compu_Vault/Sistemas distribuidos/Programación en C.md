@@ -175,155 +175,143 @@ Codigo a ejecutar en el proceso hijo
 > [!Note] Ejercicio
 > Programe una aplicación que cree un proceso hijo a partir de un proceso padre, el hijo creado a su vez creará tres procesos hijos más. A su vez cada uno de los tres procesos creará dos procesos más. Cada uno de los procesos creados imprimirá en la pantalla el pid de su padre si se trata de un hijo terminal o los pid’s de sus hijos creados si se trata de un proceso padre.
 
+En total se crean **10 procesos**:
+
+- 1 proceso padre original.
+- 1 proceso hijo creado por el padre.
+- 3 procesos creados por ese hijo.
+- 6 procesos terminales creados por los tres procesos anteriores.
+
 ```C
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-int main(void){
+int main(void)
+{
+    pid_t pid;
+    pid_t hijos[3];
 
-    pid_t pid;
-    pid_t hijos[3];
+    /* El proceso padre crea al primer hijo */
+    pid = fork();
 
-    /* El proceso padre crea un hijo */
-    pid = fork();
+    if (pid < 0) {
+        perror("Error en fork()");
+        return 1;
+    }
 
-    if (pid < 0){
+    /* =========================
+       PROCESO PADRE ORIGINAL
+       ========================= */
+    if (pid > 0) {
 
-        perror("Error al crear el proceso");
-        exit(1);
-    }
+        printf("PROCESO PADRE\n");
+        printf("PID: %d\n", getpid());
+        printf("PID del hijo: %d\n\n", pid);
 
-    /* Proceso hijo */
-    if (pid == 0){
+        /* Esperar al hijo */
+        waitpid(pid, NULL, 0);
 
-        printf("Proceso hijo: PID = %d\n", getpid());
+        printf("Proceso padre %d: mi hijo %d ha terminado.\n",
+               getpid(), pid);
 
-        /* El hijo crea tres procesos */
-        for (int i = 0; i < 3; i++){
+        return 0;
+    }
 
-            hijos[i] = fork();
+    /* =========================
+       PRIMER PROCESO HIJO
+       ========================= */
 
-            if (hijos[i] < 0){
-                perror("Error al crear proceso");
-                exit(1);
-            }
+    printf("PROCESO HIJO\n");
+    printf("PID: %d\n", getpid());
+    printf("PID de mi padre: %d\n\n", getppid());
 
-            /* Cada uno de los tres hijos */
-            if (hijos[i] == 0){
-                pid_t nietos[2];
-                
-                /* Cada hijo crea dos procesos terminales */
-                for (int j = 0; j < 2; j++){
-                    nietos[j] = fork();
+    /* Crear tres procesos hijos */
+    for (int i = 0; i < 3; i++) {
 
-                    if (nietos[j] < 0){
-                        perror("Error al crear proceso");
-                        exit(1);
-                    }
+        hijos[i] = fork();
 
-                    /* Proceso terminal */
-                    if (nietos[j] == 0){
-                        printf(
-                            "Proceso terminal: PID = %d, PID de mi padre = %d\n",
-                            getpid(),
-                            getppid()
-                        );
-                        exit(0);
-                    }
-                }
-  
-                /* Este proceso creó dos hijos */
-                printf(
-                    "Proceso padre: PID = %d, hijos = %d, %d\n",
-                    getpid(),
-                    nietos[0],
-                    nietos[1]
-                );
+        if (hijos[i] < 0) {
+            perror("Error en fork()");
+            exit(1);
+        }
 
-                /* Esperar a que terminen sus dos hijos */
-                waitpid(nietos[0], NULL, 0);
-                waitpid(nietos[1], NULL, 0);
+        /* Proceso hijo de uno de los tres */
+        if (hijos[i] == 0) {
 
-                exit(0);
-            }
-        }
+            pid_t nietos[2];
 
-        /* El primer hijo creó tres procesos */
-        printf(
-            "Proceso padre: PID = %d, hijos = %d, %d, %d\n",
-            getpid(),
-            hijos[0],
-            hijos[1],
-            hijos[2]
-        );
+            printf("PROCESO PADRE INTERMEDIO\n");
+            printf("PID: %d\n", getpid());
+            printf("PID de mi padre: %d\n", getppid());
 
-        /* Esperar a que terminen los tres hijos */
-        for (int i = 0; i < 3; i++){
-            waitpid(hijos[i], NULL, 0);
-        }
-        exit(0);
-    }
+            /* Crear dos procesos hijos */
+            for (int j = 0; j < 2; j++) {
 
-    /* Proceso padre original */
-    printf(
-        "Proceso padre original: PID = %d, hijo creado = %d\n",
-        getpid(),
-        pid);
-    waitpid(pid, NULL, 0);
+                nietos[j] = fork();
 
-    return 0;
+                if (nietos[j] < 0) {
+                    perror("Error en fork()");
+                    exit(1);
+                }
+
+                /* Proceso terminal */
+                if (nietos[j] == 0) {
+
+                    printf("PROCESO TERMINAL\n");
+                    printf("PID: %d\n", getpid());
+                    printf("PID de mi padre: %d\n\n",
+                           getppid());
+
+                    exit(0);
+                }
+            }
+
+            /* El proceso intermedio muestra los PID de sus hijos */
+            printf("\nProceso padre %d:\n", getpid());
+            printf("PID de mis hijos: %d, %d\n\n",
+                   nietos[0], nietos[1]);
+
+            /* Esperar a los dos hijos */
+            waitpid(nietos[0], NULL, 0);
+            waitpid(nietos[1], NULL, 0);
+
+            exit(0);
+        }
+    }
+
+    /* El proceso hijo original muestra los PID de sus tres hijos */
+    printf("\nProceso padre %d:\n", getpid());
+    printf("PID de mis hijos: %d, %d, %d\n\n",
+           hijos[0], hijos[1], hijos[2]);
+
+    /* Esperar a los tres procesos */
+    waitpid(hijos[0], NULL, 0);
+    waitpid(hijos[1], NULL, 0);
+    waitpid(hijos[2], NULL, 0);
+
+    return 0;
 }
 ```
 
-En total se crean **10 procesos nuevos**, además del proceso original:
-- 1 proceso hijo creado por el padre original.
-- Ese hijo crea 3 procesos.
-- Cada uno de esos 3 procesos crea 2 procesos.
-- 1+3+(3×2)=101 + 3 + (3\times2) = 10 procesos creados.
 
-```C
-    pid_t pid;
-    pid_t hijos[3];
-```
 
-Esta sintaxis sirve para **declarar variables especializadas en almacenar IDs de procesos**, una de forma individual y la otra en un grupo o arreglo.
 
-`pid_t` es un **tipo de datos especial en C** (definido en las librerías `<sys/types.h>` o `<unistd.h>`).
+## Código 3
 
-- Se creó específicamente para guardar **PIDs** (Process IDs). El sistema operativo lo usa en lugar de un `int` común para garantizar que el programa funcione correctamente en cualquier tipo de computadora o arquitectura, sin importar si es de 32 o 64 bits.
+> [!Note] Ejercicio
+> Programe una aplicación que cree cinco procesos. Cada uno de estos procesos escribirá en un archivo una palabra de la siguiente oración. “Hola esta es mi práctica uno”. El proceso padre se encargará de escribir la última palabra (uno).
 
-```C
-    printf(
-	    "Proceso padre original: PID = %d, hijo creado = %d\n",
-		getpid(),
-		pid);
 
-    waitpid(pid, NULL, 0);
-```
 
-Este bloque de código se utiliza para rastrear el nacimiento de un proceso hijo y asegurar que el padre no termine su ejecución hasta que el hijo haya finalizado por completo.
 
-- `getpid()`: Imprime el ID único que el sistema operativo (en este caso, WSL2/Linux) le asignó a este proceso padre.
 
-- `waitpid`
-	- Inmediatamente después de imprimir el mensaje, el padre llega a esta línea y **se congela por completo (entra en estado de espera)**.
-	
-	El comportamiento de sus tres parámetros funciona así:
-	
-	1. **`pid`**: Le dice al sistema operativo: _"Quédate congelado aquí hasta que el proceso con este ID específico (el hijo) muera"_.
-	2. **`NULL`**: Significa que al padre no le interesa guardar el reporte de daños o código de error del hijo; solo le importa saber que ya terminó.
-	3. **`0`**: Es una bandera de configuración que obliga al padre a esperar de forma **estricta y síncrona**. No avanzará a la siguiente línea de código bajo ninguna circunstancia hasta que el hijo deje de existir.
 
-```C
-if (pid < 0) { 
-	perror("Error al crear el proceso"); 
-	exit(1); 
-}
-```
 
-Este bloque **es la forma correcta** de manejar errores al usar `fork()` en C.
+## Código 4
 
-- A diferencia de `printf`, la función `perror()` no solo imprime el texto (`"Error al crear el proceso"`), sino que automáticamente le añade dos puntos y el motivo exacto por el cual falló el sistema operativo (por ejemplo: `Error al crear el proceso: Resource temporarily unavailable`).
+> [!Note] Ejercicio
+> Simule una red de anillo unidireccional a través de procesos. Utilice la línea de comando para indicar el número de procesos que se crearán sobre el anillo. Después de la creación del anillo, cada proceso se identifica así mismo con un ID de proceso y el ID del proceso padre. Cada proceso pasará un token y cuando le token llegue a cada nodo verificará si el mensaje contenido en el token es para él, si el mensaje es para ese proceso imprimirá el mensaje en la pantalla, en otro caso lo pasará al siguiente proceso. El mensaje, así como el formato del token es a su elección. Utilice tuberías como aproximación de solución para simular los enlaces de comunicación. Asuma tres ciclos de recorrido del token y entonces concluirá la aplicación.
+
 
