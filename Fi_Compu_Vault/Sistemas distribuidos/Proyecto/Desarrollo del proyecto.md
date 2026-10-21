@@ -1,5 +1,5 @@
 
-# Ruta de aprendizaje para tu proyecto
+# Ruta de aprendizaje del proyecto
 
 ## Etapa 1. Java y sockets TCP
 

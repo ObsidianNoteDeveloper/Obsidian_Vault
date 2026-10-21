@@ -12,13 +12,20 @@ Superclase/_Clase padre_ (enumera los atributos y comportamiento común) >> Subc
 - Las flechas con punta triangular hueca indican herencia y siempre van desde una subclase a una superclase.
 - Las flechas de varias subclases se pueden solapar o dibujarse por separado.
 
+<div style="text-align: center;">  
+<img src="Pasted%20image%2020261016140706.png" width="500">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 1</b>. Diagrama UML de una jerarquía de clases. Todas las clases de este diagrama son parte de la jerarquía de clases Animal.
+</div>
+
 > [!Note]
 > En un diagrama UML las clases se pueden simplificar si es más importante mostrar sus relaciones que sus contenidos
 
 Las subclases pueden sobrescribir el comportamiento de los métodos que heredan de clases padre.
 - Una subclase puede sustituir completamente el comportamiento por defecto o limitarse a mejorarlo con material adicional.
 
-##### Los pilares de la POO
+#### Los pilares de la POO
 
 **Abstracción**
 - Es el modelo de un objeto o fenómeno del mundo real, limitado a un contexto específico, que representa todos los datos relevantes a este contexto con gran precisión, omitiendo el resto.
@@ -38,12 +45,29 @@ Las subclases pueden sobrescribir el comportamiento de los métodos que heredan 
 > - Las flechas con punta triangular hueca y líneas discontinuas indican que las clases implementan una interfaz.
 > - Varias clases pueden implementar una interfaz.
 
+<div style="text-align: center;">  
+<img src="Pasted%20image%2020261016141600.png" width="500">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 2</b>. Diagrama UML de una jerarquía de clases. Todas las clases de este diagrama son parte de la jerarquía de clases Animal.
+</div>
 
+**Herencia**
 
-## Los pilares de la POO
+La herencia es la capacidad de crear nuevas clases sobre otras existentes.
 
+En la mayoría de los lenguajes de programación una subclase puede extender una única superclase. Por otro lado, cualquier clase puede implementar varias interfaces al mismo tiempo.
 
-## Relaciones entre objetos
+<div style="text-align: center;">  
+<img src="Pasted%20image%2020261016142602.png" width="300">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 3</b>. Diagrama UML de extensión de una única clase en comparación con la implementación de múltiples interfaces al mismo tiempo.
+</div>
+
+**Polimorfismo**
+
+#### Relaciones entre objetos
 
 
 # INTRODUCCIÓN A LOS PATRONES DE DISEÑO
