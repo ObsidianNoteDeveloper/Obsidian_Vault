@@ -1,6 +1,8 @@
 
 ## Especificaciones 
 
+Asus Vivobook 16
+
 |Componente|Tu equipo|
 |---|---|
 |**CPU**|Intel Core 5 210H, 2.20 GHz|

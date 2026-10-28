@@ -1,5 +1,4 @@
 
-
 # **Windows Subsystem for Linux 2** o Subsistema de Windows para Linux 2
 
 Es una herramienta de _Microsoft_ que te permite ejecutar un entorno Linux completo directamente dentro de Windows, sin necesidad de configurar un arranque dual (_dual-boot_) ni recurrir a máquinas virtuales tradicionales pesadas.

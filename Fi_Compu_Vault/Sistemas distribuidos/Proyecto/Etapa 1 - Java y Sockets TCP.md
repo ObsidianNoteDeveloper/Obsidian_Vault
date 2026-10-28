@@ -7,13 +7,10 @@ La idea es avanzar como lo haría en un proyecto de ingeniería de software:
 ## Índice
 
 [Fundamentos de comunicación en red](#Fundamentos%20de%20comunicación%20en%20red)
-
 [Fundamentos de Java](#Fundamentos%20de%20Java)
 [Clases de Java para sockets TCP](#Clases%20de%20Java%20para%20sockets%20TCP)
 [Herramientas y conocimientos técnicos](#Herramientas%20y%20conocimientos%20técnicos)
 [Guía paso a paso: construir el cliente-servidor](#Guía%20paso%20a%20paso%20construir%20el%20cliente-servidor)
-[Practicas](#Practicas)
-[Evaluación de conocimientos](#Evaluación%20de%20conocimientos)
 [Ruta del Proyecto](#Ruta%20del%20Proyecto)
 
 
@@ -70,6 +67,13 @@ La comunicación TCP entre los clientes y el servidor es una parte del sistema; 
 > - HTTP: define el intercambio de solicitudes y respuestas para servicios web.
 > - DNS: permite consultar información asociada con nombres de dominio.
 
+<div style="text-align: center;">  
+<img src="ModelTCP.png" width="300">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 1</b>. Modelo TCP IP. https://medium.com/
+</div>
+
 > [!Note]
 > En este proyecto, TCP se utilizará para comunicar los clientes Java con el servidor, mientras que HTTP podrá utilizarse para exponer una API REST.
 
@@ -103,7 +107,7 @@ La comunicación TCP entre los clientes y el servidor es una parte del sistema; 
 <img src="clienteServidor.png" width="500">  
 </div>
 <div style="text-align: center; color: #555555;">
-<b>Imagen 1</b>. Cliente/servidor.
+<b>Imagen 2</b>. Cliente/servidor. https://ee547.usc-ece.com
 </div>
 
 **Arquitectura centralizada**
@@ -137,46 +141,49 @@ En este proyecto,  se implementara principalmente la arquitectura cliente-servid
 
 La IP identifica una interfaz de red y el puerto identifica un punto de comunicación de una aplicación. Por ejemplo, `127.0.0.1:5000` indica el puerto 5000 del equipo local.
 
-<div style="text-align: center;">  
-<img src="ModelTCP.png" width="500">  
-</div>
-<div style="text-align: center; color: #555555;">
-<b>Imagen 2</b>. Modelo TCP IP.
-</div>
-
 ## TCP
 
-Es un protocolo de transporte orientado a conexión que proporciona un flujo de bytes ordenado y confiable. Gestiona retransmisiones y entrega de datos, pero tu aplicación debe definir cómo separar e interpretar sus mensajes.
+Es un protocolo de transporte orientado a conexión que proporciona un flujo de bytes ordenado y confiable. Gestiona retransmisiones y entrega de datos, pero la aplicación debe definir cómo separar e interpretar los mensajes.
 
-![](TCP.png)
+<div style="text-align: center;">  
+<img src="TCP.png" width="300">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 3</b> Modelo cliente - servidor. https://gateoverflow.in/ 
+</div>
 
-#### Funcionamiento de TCP
+En TCP, SYN y ACK son indicadores (flags) de la cabecera TCP que permiten establecer una conexión y confirmar la recepción de información entre dos dispositivos.
 
-El intercambio que programaremos será:
+**SYN (Synchronize):** Es una bandera TCP utilizada para iniciar una conexión y sincronizar los números de secuencia iniciales de los dos extremos.
+
+**ACK (Acknowledgment):** Es una bandera TCP que indica que el campo de confirmación es válido. Este campo permite confirmar los bytes recibidos y, durante el establecimiento de la conexión, reconocer el número de secuencia inicial del otro extremo.
+
+TCP establece normalmente una conexión mediante un procedimiento de tres pasos llamado three-way handshake o negociación de tres vías.
+
+| Paso | Banderas TCP | Función                                                                   |
+| ---- | ------------ | ------------------------------------------------------------------------- |
+| 1    | `SYN`        | El cliente inicia la conexión.                                            |
+| 2    | `SYN + ACK`  | El servidor reconoce el SYN del cliente y sincroniza su propia secuencia. |
+| 3    | `ACK`        | El cliente reconoce el SYN del servidor.                                  |
+#### Funcionamiento usando TCP
+
+El intercambio programado será:
 
 1. El servidor crea un `ServerSocket` y queda escuchando.
-    
 2. El cliente crea un `Socket` e intenta conectarse a la IP y al puerto del servidor.
-    
 3. El servidor acepta la conexión mediante `accept()`.
-    
 4. El cliente envía un mensaje.
-    
 5. El servidor lo lee, lo procesa y responde.
-    
 6. El cliente lee la respuesta.
-    
 7. Ambos cierran los recursos.
-    
 
-Hay tres detalles que conviene recordar:
+Puntos a considerar:
 
 - `accept()` bloquea la ejecución hasta que llega una conexión.
     
 - `readLine()` espera hasta recibir un salto de línea o detectar el fin del flujo.
     
-- Cerrar el socket termina esa conexión, pero no implica que el proceso servidor deba apagarse.
-    
+- Al cerrar el socket termina esa conexión, pero no implica que el proceso servidor deba apagarse.
 
 En esta etapa el servidor atenderá un cliente a la vez. La atención simultánea mediante hilos corresponde a la etapa 2.
 
@@ -239,30 +246,32 @@ javac -version
 ```
 
 - `java` permite ejecutar aplicaciones Java.
-    
 - `javac` compila archivos `.java`.
-    
 - Ambos comandos deberían estar disponibles y corresponder a una instalación compatible del JDK.
-    
 
 Si trabajas en IntelliJ, comprueba también que el proyecto tenga un Project SDK configurado.
 
 ## 1. Crear el proyecto
 
-En IntelliJ IDEA:
-
-1. Selecciona New Project.
-    
-2. Elige Java.
-    
-3. Selecciona un JDK instalado, preferiblemente Java 17 o una versión LTS posterior.
-    
-4. Crea un proyecto llamado `SistemaEventosRed`.
-    
-5. Dentro de `src/main/java`, crea un paquete llamado `red`.
+En IntelliJ IDEA, seleccionar **New Proyect** y configurar lo siguiente antes de crear el proyecto:
+- **Name:** ServidorTCP
+- **Lenguage:** Java
+- **Build systema:** Maven
+- **JDK:** Java 21
 
 > [!Note]
-> Crear un proyecto Maven, conserva esa estructura. Aunque Maven no es indispensable para este ejercicio, nos permitirá agregar las dependencias del proyecto más adelante.
+> Para el servidor se usaran las clases de red que Java ya incluye.
+
+#### Paquete red
+
+En el panel de proyectos de IntelliJ, abrir `src/main/java`.
+
+1. Haz clic derecho sobre `java`.
+2. Selecciona New → Package.
+3. Escribe `red`.
+
+> [!Note]
+> Crear un proyecto Maven y conservar esa estructura. Aunque Maven no es indispensable para esta etapa, nos permite agregar las dependencias del proyecto más adelante.
 
 La estructura inicial será:
 
@@ -274,14 +283,18 @@ SistemaEventosRed/
 ```
 
 > [!Imprtant]
-> Son dos programas separados. Primero iniciarás el servidor y después ejecutarás el cliente. No necesitas crear dos proyectos todavía.
+> Son dos programas separados. Primero se iniciara el servidor y después se ejecutara el cliente.
 
 ## 2. Programar el servidor TCP
 
-Crear `Servidor.java`
+#### Creación del archivo `Servidor.java`
 
+- Hacer clic derecho sobre el paquete `red`
+- Selecciona New → Java Class 
+- Y escribe `Servidor`.
+
+**Código implementado**
 ```Java
-
 package red;
 
 import java.io.BufferedReader;
@@ -354,27 +367,27 @@ public class Servidor {
 }
 ```
 
-|Instrucción|Explicación|
-|---|---|
-|`new ServerSocket(5000)`|Abre el puerto TCP 5000 para escuchar conexiones.|
-|`while (true)`|Mantiene el servidor disponible para aceptar conexiones sucesivas.|
-|`accept()`|Espera a que un cliente se conecte y devuelve un `Socket`.|
-|`getInputStream()`|Obtiene el flujo de entrada de la conexión.|
-|`getOutputStream()`|Obtiene el flujo de salida de la conexión.|
-|`readLine()`|Lee el evento enviado por el cliente.|
-|`println()`|Envía la respuesta y agrega un salto de línea.|
-|`try-with-resources`|Cierra automáticamente los recursos al salir del bloque.|
+| **Instrucción**          | **Explicación**                                                    |
+| ------------------------ | ------------------------------------------------------------------ |
+| `new ServerSocket(5000)` | Abre el puerto TCP 5000 para escuchar conexiones.                  |
+| `while (true)`           | Mantiene el servidor disponible para aceptar conexiones sucesivas. |
+| `accept()`               | Espera a que un cliente se conecte y devuelve un `Socket`.         |
+| `getInputStream()`       | Obtiene el flujo de entrada de la conexión.                        |
+| `getOutputStream()`      | Obtiene el flujo de salida de la conexión.                         |
+| `readLine()`             | Lee el evento enviado por el cliente.                              |
+| `println()`              | Envía la respuesta y agrega un salto de línea.                     |
+| `try-with-resources`     | Cierra automáticamente los recursos al salir del bloque.           |
 
-Observa que el servidor no se limita a recibir una conexión: el ciclo `while` le permite aceptar nuevos clientes después de terminar la conexión anterior.
+El servidor no se limita a recibir una conexión: el ciclo `while` le permite aceptar nuevos clientes después de terminar la conexión anterior.
 
-Limitación intencional: este servidor procesa un cliente a la vez. Mientras espera el mensaje de un cliente, no puede atender otro. En la etapa 2 modificaremos este diseño para que cada conexión se atienda concurrentemente.
+Limitación intencional: este servidor procesa un cliente a la vez. Mientras espera el mensaje de un cliente, no puede atender otro. En la etapa 2 se modificara este diseño para que cada conexión se atienda concurrentemente.
 
 ## 3. Programar el cliente TCP
 
 Crear `Cliente.java` en el mismo paquete `red`
 
+**Código implementado**
 ```Java
-
 package red;
 
 import java.io.BufferedReader;
@@ -429,16 +442,13 @@ public class Cliente {
 ```
 
 1. `new Socket(HOST, PUERTO)` intenta establecer la conexión TCP.
-    
 2. `salida.println(evento)` envía el evento simulado.
-    
 3. `entrada.readLine()` espera la respuesta del servidor.
-    
 4. Al terminar el bloque `try`, se cierra la conexión.
 
-En este primer ejercicio, `127.0.0.1` significa que el cliente y el servidor se ejecutan en el mismo equipo. Cuando trabajes con equipos distintos, cambiarás esta dirección por la IP del equipo donde se ejecute el servidor.
+En este primer ejercicio, `127.0.0.1` significa que el cliente y el servidor se ejecutan en el mismo equipo. Cuando se trabaje con equipos distintos, se cambiarán esta dirección por la IP del equipo donde se ejecute el servidor.
 
-El evento se transmite como texto delimitado por campos. Más adelante podremos sustituir este formato por JSON, pero no es necesario hacerlo todavía.
+El evento se transmite como texto delimitado por campos. Más adelante podremos sustituir este formato por JSON.
 
 ## 4. Ejecutar los programas
 

@@ -1,5 +1,50 @@
 
-# Ruta de aprendizaje del proyecto
+# Sistema distribuido para la recopilación y procesamiento de eventos de red
+
+### Planteamiento 
+
+En una red de computadoras se generan continuamente diferentes eventos, como conexiones, solicitudes y comunicaciones entre dispositivos. El procesamiento de esta información puede dividirse entre diferentes componentes que trabajen de manera concurrente y se comuniquen entre sí. 
+
+Por ello, se propone desarrollar un sistema distribuido para la recopilación, transmisión y procesamiento de eventos de red, utilizando diferentes procesos o servicios independientes que colaboren para realizar las distintas tareas del sistema.
+
+### Objetivo 
+
+Diseñar e implementar un sistema distribuido capaz de recibir eventos de red generados de manera simulada, distribuir su procesamiento entre diferentes componentes y almacenar los resultados para su posterior consulta. 
+
+### Elementos de Sistemas Distribuidos 
+
+El proyecto permitirá aplicar conceptos fundamentales de la asignatura, entre ellos:
+- Comunicación entre procesos y nodos. 
+- Arquitectura cliente-servidor.
+- Concurrencia.
+- Paso de mensajes. 
+- Sincronización.
+- Comunicación mediante sockets.
+- Distribución de tareas.
+- Manejo de fallos y disponibilidad.
+- Escalabilidad del sistema. 
+ 
+### Tecnologías propuestas 
+
+La implementación se realizará principalmente utilizando Java sobre Linux, empleando comunicación mediante sockets. Se utilizará PostgreSQL para el almacenamiento de los eventos y HTTP/REST para permitir la consulta de la información. El proyecto se gestionará mediante Maven y se utilizarán pruebas unitarias con JUnit.
+
+### Funcionamiento general 
+
+El sistema contará con varios componentes que colaborarán entre sí: 
+1. Generadores de eventos
+2. Servidor de procesamiento
+3. Base de datos
+4. API para consulta 
+
+Los generadores enviarán eventos al servidor, el cual procesará y almacenará la información. Posteriormente, los datos podrán consultarse mediante una interfaz de comunicación HTTP. 
+
+![](Diagrama1.drawio.png)
+
+### Resultado esperado 
+
+Obtener un prototipo funcional de un sistema distribuido que permita demostrar la comunicación y coordinación entre diferentes componentes, así como el procesamiento concurrente y el intercambio de información entre nodos.
+
+# Ruta de desarrollo del proyecto
 
 ## Etapa 1. Java y sockets TCP
 
