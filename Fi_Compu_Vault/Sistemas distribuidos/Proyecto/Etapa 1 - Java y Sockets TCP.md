@@ -180,9 +180,7 @@ El intercambio programado será:
 Puntos a considerar:
 
 - `accept()` bloquea la ejecución hasta que llega una conexión.
-    
 - `readLine()` espera hasta recibir un salto de línea o detectar el fin del flujo.
-    
 - Al cerrar el socket termina esa conexión, pero no implica que el proceso servidor deba apagarse.
 
 En esta etapa el servidor atenderá un cliente a la vez. La atención simultánea mediante hilos corresponde a la etapa 2.
@@ -384,154 +382,409 @@ Limitación intencional: este servidor procesa un cliente a la vez. Mientras esp
 
 ## 3. Programar el cliente TCP
 
-Crear `Cliente.java` en el mismo paquete `red`
+#### Crear `Cliente.java`
+
+Se creó el archivo `Cliente.java` en el mismo paquete `red`
 
 **Código implementado**
 ```Java
-package red;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-
-public class Cliente {
-
-    private static final String HOST = "127.0.0.1";
-    private static final int PUERTO = 5000;
-
-    public static void main(String[] args) {
-
-        System.out.println("Conectando con el servidor...");
-
-        try (Socket socket = new Socket(HOST, PUERTO);
-             BufferedReader entrada = new BufferedReader(
-                 new InputStreamReader(
-                     socket.getInputStream()
-                 )
-             );
-             PrintWriter salida = new PrintWriter(
-                 socket.getOutputStream(), true
-             )) {
-
-            System.out.println("Conexión establecida.");
-
-            String evento =
-                "IP=192.168.1.10;PROTOCOLO=TCP;"
-                + "PUERTO=443;TIPO=CONEXION";
-
-            salida.println(evento);
-
-            System.out.println("Evento enviado: " + evento);
-
-            String respuesta = entrada.readLine();
-
-            System.out.println(
-                "Respuesta del servidor: " + respuesta
-            );
-
-        } catch (IOException e) {
-            System.err.println(
-                "No se pudo comunicar con el servidor: "
-                + e.getMessage()
-            );
-        }
-    }
+package red;  
+  
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+import java.io.PrintWriter;  
+import java.net.Socket;  
+  
+public class Cliente {  
+  
+    private static final String HOST = "172.29.43.71";  
+    private static final int PUERTO = 5000;  
+  
+    public static void main(String[] args) {  
+  
+        System.out.println("Conectando con el servidor...");  
+  
+        try (  
+                Socket socket = new Socket(HOST, PUERTO);  
+  
+                BufferedReader entrada = new BufferedReader(  
+                        new InputStreamReader(socket.getInputStream())  
+                );  
+  
+                PrintWriter salida = new PrintWriter(  
+                        socket.getOutputStream(), true  
+                )  
+        ) {  
+  
+            // Obtener los datos reales de la conexión  
+            String ipCliente =  
+                    socket.getLocalAddress().getHostAddress();  
+  
+            int puertoCliente = socket.getLocalPort();  
+  
+            String ipServidor =  
+                    socket.getInetAddress().getHostAddress();  
+  
+            int puertoServidor = socket.getPort();  
+  
+            System.out.println("Conexión establecida.");  
+            System.out.println("IP del cliente: " + ipCliente);  
+            System.out.println("Puerto local del cliente: " + puertoCliente);  
+            System.out.println("IP del servidor: " + ipServidor);  
+            System.out.println("Puerto del servidor: " + puertoServidor);  
+  
+            // Construir el evento con los datos reales del cliente  
+            String evento =  
+                    "IP=" + ipCliente  
+                            + ";PROTOCOLO=TCP"  
+                            + ";PUERTO=" + puertoCliente  
+                            + ";TIPO=CONEXION";  
+  
+            salida.println(evento);  
+  
+            System.out.println("Evento enviado: " + evento);  
+  
+            String respuesta = entrada.readLine();  
+  
+            System.out.println(  
+                    "Respuesta del servidor: " + respuesta  
+            );  
+  
+        } catch (IOException e) {  
+            System.err.println(  
+                    "No se pudo comunicar con el servidor: "  
+                            + e.getMessage()  
+            );  
+        }  
+    }  
 }
 ```
 
-1. `new Socket(HOST, PUERTO)` intenta establecer la conexión TCP.
-2. `salida.println(evento)` envía el evento simulado.
-3. `entrada.readLine()` espera la respuesta del servidor.
-4. Al terminar el bloque `try`, se cierra la conexión.
+El cliente TCP es el componente encargado de iniciar la comunicación con el servidor, enviar un evento de red simulado y recibir una respuesta que confirme su procesamiento. Para esta primera etapa del proyecto, su propósito es comprobar el establecimiento de una conexión TCP y el intercambio de mensajes entre dos procesos Java.
 
-En este primer ejercicio, `127.0.0.1` significa que el cliente y el servidor se ejecutan en el mismo equipo. Cuando se trabaje con equipos distintos, se cambiarán esta dirección por la IP del equipo donde se ejecute el servidor.
+###### Configuración de la conexión
 
-El evento se transmite como texto delimitado por campos. Más adelante podremos sustituir este formato por JSON.
-
-## 4. Ejecutar los programas
-
-1. Ejecuta `Servidor.java`.
-    En IntelliJ, abre la clase y pulsa el botón de ejecución. Debes ver algo parecido a:
-	-Iniciando servidor TCP...
-	-Servidor escuchando en el puerto 5000
-	
-	Deja el proceso ejecutándose. El servidor está esperando una conexión.
-
-2. Ejecuta `Cliente.java`.
-    
-    Debe conectarse al servidor, enviar el evento y recibir la confirmación.
-
-3. Revisa la consola del servidor.
-    
-    Debes encontrar la conexión y el evento recibido.
-
-4. Ejecuta el cliente otra vez.
-    
-    El servidor debe aceptar una nueva conexión y procesar el nuevo envío sin necesidad de reiniciarse.
-
-## Verificar el resultado esperado 
-
-Si todo funciona correctamente, las salidas serán similares a las siguientes.
-
-Consola del servidor
-```Bash
-Iniciando servidor TCP... Servidor escuchando en el puerto 5000 Cliente conectado: /127.0.0.1:xxxxx Evento recibido: IP=192.168.1.10;PROTOCOLO=TCP;PUERTO=443;TIPO=CONEXION
+```Java
+private static final String HOST = "172.29.43.71";
+private static final int PUERTO = 5000;
 ```
 
-Consola del cliente
-```Bash
-Conectando con el servidor... Conexión establecida. Evento enviado: IP=192.168.1.10;PROTOCOLO=TCP;PUERTO=443;TIPO=CONEXION Respuesta del servidor: OK: evento recibido por el servidor
+Se definen los parámetros necesarios para localizar el servidor. La variable `HOST` contiene la dirección IP utilizada para alcanzar el servidor ejecutado en Ubuntu mediante WSL2, mientras que `PUERTO` especifica el puerto `5000`, donde el servidor espera las conexiones entrantes.
+
+> [!warning]
+> La dirección utilizada corresponde a la configuración de red de las pruebas realizadas. Debido a que la dirección virtual de WSL2 puede cambiar, deberá actualizarse si deja de ser accesible.
+
+###### Establecimiento de la conexión TCP
+
+```Java
+Socket socket = new Socket(HOST, PUERTO);
 ```
 
-El valor xxxxx representa un puerto remoto temporal que el sistema operativo asigna al cliente.
+La clase `Socket` permite establecer una conexión TCP con el servidor. Al ejecutarse esta instrucción, Java intenta conectarse a la dirección y al puerto especificados. Si la conexión se establece correctamente, el programa puede intercambiar información con el servidor a través del socket.
 
-Este resultado demuestra que las aplicaciones intercambian datos mediante TCP y que el servidor puede recibir un evento y responder al cliente.
+En las pruebas realizadas, el cliente se ejecutó tanto desde Ubuntu en WSL2 como desde Windows mediante IntelliJ IDEA. Esto permitió comprobar la comunicación entre procesos ejecutados en distintos entornos operativos.
 
-Todavía no significa que el evento esté almacenado en una base de datos: por ahora únicamente se muestra en la consola.
+###### Preparación de los canales de comunicación 
 
-# Practicas
+```Java
+BufferedReader entrada = new BufferedReader(
+        new InputStreamReader(socket.getInputStream())
+);
 
-Para comprobar esta estapa
+PrintWriter salida = new PrintWriter(
+        socket.getOutputStream(), true
+);
+```
 
-**Listas de Ejercicios**
+Se crean dos objetos para intercambiar mensajes mediante la conexión TCP. `PrintWriter` permite enviar texto al servidor, mientras que `BufferedReader` permite recibir su respuesta. El parámetro `true` de `PrintWriter` habilita el vaciado automático del flujo al utilizar `println()`, lo que permite enviar el mensaje sin tener que llamar explícitamente a `flush()`.
 
-- [ ] Cambiar el contenido del evento
-	Modifica la IP, el puerto y el tipo de evento. Comprueba que el servidor recibe exactamente lo que envía el cliente.
+###### Obtención de la IP y los puertos de la conexión
 
-- [ ] Enviar tres eventos
-	Haz que el cliente envíe tres líneas diferentes y que el servidor las lea en un ciclo hasta que termine el flujo. Recuerda que el protocolo debe definir cómo termina el envío.
+```Java
+String ipCliente =
+        socket.getLocalAddress().getHostAddress();
 
-- [ ] Responder con información del evento
-	Modifica la respuesta del servidor para incluir el tipo de evento que recibió.
+int puertoCliente = socket.getLocalPort();
 
-- [ ] Probar una desconexión
-	Detén el servidor e intenta ejecutar el cliente. Identifica el error y explica por qué ocurre.
+String ipServidor =
+        socket.getInetAddress().getHostAddress();
 
-- [ ] Conectar desde otro equipo
-	Cuando el ejercicio local funcione, prueba el servidor en un equipo Linux y el cliente en otro equipo de la misma red, utilizando la IP real del servidor y verificando el firewall.
+int puertoServidor = socket.getPort();
+```
+
+Este apartado corresponde a la verificación de la conexión TCP. Se obtienen los valores de la dirección y del puerto, directamente del objeto `Socket`.
+
+- `getLocalAddress()` obtiene la dirección IP local utilizada por el cliente en esa conexión.
+- `getLocalPort()` obtiene el puerto local asignado automáticamente al cliente.
+- `getInetAddress()` obtiene la dirección IP del servidor al que se conectó.
+- `getPort()` obtiene el puerto de destino del servidor, que en esta prueba es el `5000`.
+
+Estos datos permiten identificar los extremos de la conexión desde la perspectiva del cliente. Es importante señalar que la IP local obtenida no necesariamente corresponde a la dirección física de la computadora, ya que pueden intervenir interfaces virtuales y mecanismos de traducción de direcciones de red (NAT).
+
+###### Construcción y envío del evento
+
+```Java
+String evento =
+        "IP=" + ipCliente
+        + ";PROTOCOLO=TCP"
+        + ";PUERTO=" + puertoCliente
+        + ";TIPO=CONEXION";
+
+salida.println(evento);
+```
+
+Se construye un mensaje de texto que representa un evento de red simulado. El mensaje incluye la dirección IP local utilizada por el cliente, el protocolo de transporte, el puerto de origen y el tipo de evento.
+
+El método `println()` transmite el mensaje al servidor y agrega un salto de línea. Esto es importante porque el servidor utiliza `readLine()` para determinar dónde termina el mensaje recibido.
 
 > [!Note]
-> Para el segundo ejercicio tendrás que aprender a leer múltiples líneas. Por ejemplo, puedes usar un ciclo que invoque `readLine()` repetidamente hasta que el resultado sea `null`. Así podrás enviar varios eventos por una misma conexión antes de cerrarla.
+> En esta etapa, el evento es una representación de prueba creada por el programa; no constituye una captura automática del tráfico real de la red.
 
-# Evaluación de conocimientos
+###### Recepción de la respuesta del servidor
 
-- Explico la diferencia entre IP, puerto, socket y protocolo TCP.
-	
-- Comprendo la función de ServerSocket y Socket.
-	
-- Puedo crear un cliente que se conecte a un servidor.
-	
-- Puedo enviar un mensaje y leer una respuesta.
-	
-- Comprendo por qué se utilizan BufferedReader y PrintWriter.
-	
-- Utilizo try-with-resources para cerrar conexiones y flujos.
-	
-- Puedo explicar qué ocurre cuando el servidor no está disponible.
-	
-- Consigo ejecutar varias conexiones sucesivas sin reiniciar el servidor.
+```Java
+String respuesta = entrada.readLine();
+
+System.out.println(
+        "Respuesta del servidor: " + respuesta
+);
+```
+
+Después de enviar el evento, el cliente espera una respuesta del servidor. El método `readLine()` bloquea la ejecución hasta recibir una línea de texto o detectar el cierre de la conexión. En las pruebas realizadas, el servidor respondió con el mensaje `OK: evento recibido por el servidor`, confirmando que recibió el evento enviado.
+
+###### Manejo de errores y cierre de recursos 
+
+```Java
+} catch (IOException e) {
+    System.err.println(
+            "No se pudo comunicar con el servidor: "
+                    + e.getMessage()
+    );
+}
+```
+
+El bloque `catch` permite informar errores relacionados con la comunicación, como una conexión rechazada, un servidor inaccesible o un problema durante la lectura o escritura.
+
+Además, el uso de `try-with-resources` permite cerrar automáticamente el socket y los flujos de entrada y salida cuando termina el bloque, incluso si ocurre una excepción. Esto evita mantener recursos de comunicación abiertos innecesariamente.
+
+#### Crear `Cliente.py`.
+
+En VS Code, se creó la carpeta `ClienteTCP`, y dentro se creó el archivo `cliente.py`.
+
+**Código implementado**
+```Python
+import socket
+
+# Dirección y puerto del servidor Java en Ubuntu/WSL2
+HOST = "172.29.43.71"
+PUERTO = 5000
+
+
+def main():
+    print("Conectando con el servidor...")
+
+    try:
+        # Establecer la conexión TCP
+        with socket.create_connection(
+            (HOST, PUERTO), timeout=5
+        ) as cliente:
+
+            # Obtener los datos reales de la conexión
+            ip_cliente, puerto_cliente = cliente.getsockname()
+            ip_servidor, puerto_servidor = cliente.getpeername()
+
+            print("Conexión establecida.")
+            print(f"IP del cliente: {ip_cliente}")
+            print(f"Puerto local del cliente: {puerto_cliente}")
+            print(f"IP del servidor: {ip_servidor}")
+            print(f"Puerto del servidor: {puerto_servidor}")
+
+            # Construir el evento de red
+            evento = (
+                f"IP={ip_cliente};"
+                f"PROTOCOLO=TCP;"
+                f"PUERTO={puerto_cliente};"
+                f"TIPO=CONEXION"
+            )
+
+            # Enviar el evento terminado en salto de línea
+            cliente.sendall((evento + "\n").encode("utf-8"))
+
+            print(f"Evento enviado: {evento}")
+
+            # Recibir la respuesta del servidor
+            with cliente.makefile(
+                "r", encoding="utf-8"
+            ) as entrada:
+                respuesta = entrada.readline()
+
+            if respuesta:
+                print(f"Respuesta del servidor: {respuesta.strip()}")
+            else:
+                print("El servidor cerró la conexión sin responder.")
+
+    except (OSError, TimeoutError) as error:
+        print(f"No se pudo comunicar con el servidor: {error}")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+El código utiliza el módulo `socket` de Python, que forma parte de su biblioteca estándar. No se requirió instalar paquetes adicionales.
+
+| **Instrucción**              | **Función**                                                         |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `socket.create_connection()` | Establece la conexión TCP con el servidor Java.                     |
+| `cliente.getsockname()`      | Obtiene la IP local y el puerto de origen del cliente.              |
+| `cliente.getpeername()`      | Obtiene la IP y el puerto del servidor remoto.                      |
+| `cliente.sendall()`          | Envía el mensaje completo por el socket.                            |
+| `cliente.makefile()`         | Permite leer la respuesta del servidor como texto, línea por línea. |
+| `encode("utf-8")`            | Convierte el mensaje de texto en bytes para transmitirlo.           |
+
+El evento termina con `"\n"`. Esto es indispensable porque el servidor Java utiliza `readLine()` para detectar el final del mensaje. El servidor responder con una línea terminada en salto de línea para que Python pueda completar su lectura.
+
+## Ejecución y verificación de los programas
+
+En esta sección se describe el procedimiento para ejecutar el servidor y el cliente TCP desarrollados en Java, así como las pruebas realizadas para comprobar la comunicación entre Ubuntu mediante WSL2 y Windows 11.
+
+El proyecto utiliza Maven para compilar las clases Java. Los programas se ejecutan desde el directorio del proyecto `ServidorTCP`, y las clases compiladas se encuentran en `target/classes`.
+
+###### Verificación de la dirección IP y del puerto
+
+Debido a que el servidor se ejecuta dentro de Ubuntu mediante WSL2, es necesario identificar la dirección IP utilizada por ese entorno para establecer la comunicación desde Windows.
+
+Desde Windows PowerShell se ejecuta:
+```powershell
+wsl hostname -I
+```
+
+En las pruebas realizadas, el comando devolvió la dirección `172.29.43.71`, correspondiente a la dirección IP del entorno Ubuntu en WSL2.
+
+A continuación, se verifica si el servidor es accesible a través del puerto TCP `5000`:
+```powershell
+Test-NetConnection 172.29.43.71 -Port 5000
+```
+
+El resultado relevante fue:
+```powershell
+RemoteAddress    : 172.29.43.71
+RemotePort       : 5000
+InterfaceAlias   : vEthernet (WSL (Hyper-V firewall))
+SourceAddress    : 172.29.32.1
+TcpTestSucceeded : True
+```
+
+El valor `TcpTestSucceeded : True` indica que fue posible establecer una conexión TCP con la dirección y el puerto especificados. La dirección `172.29.32.1` corresponde a la dirección de origen que Windows utilizó en esta prueba.
+
+###### Ejecutar el servidor TCP
+
+Primero, se inicia Ubuntu desde Windows PowerShell:
+```powershell
+wsl
+```
+
+Después, se accede al directorio del proyecto:
+```bash
+cd /mnt/c/Users/rojor/Documents/PROGRAMACION/Java/ServidorTCP
+```
+
+Antes de ejecutar el servidor, es necesario que el proyecto se encuentre compilado. Si se modificó el código fuente, puede compilarse con Maven:
+```bash
+mvn clean compile
+```
+
+Una vez compilado, se inicia el servidor con:
+```bash
+java -cp target/classes red.Servidor
+```
+
+Si el programa se ejecuta correctamente, muestra:
+```text
+Iniciando servidor TCP...
+Servidor escuchando en el puerto 5000
+```
+
+En este momento, el servidor queda a la espera de conexiones entrantes. La terminal debe permanecer abierta mientras se realizan las pruebas con los clientes.
+
+###### Ejecutar el cliente desde Ubuntu
+
+Se abre otra terminal de Ubuntu mediante WSL2 y se accede al directorio del proyecto:
+```bash
+cd /mnt/c/Users/rojor/Documents/PROGRAMACION/Java/ServidorTCP
+```
+
+A continuación, se ejecuta el cliente:
+```bash
+java -cp target/classes red.Cliente
+```
+
+Durante las pruebas, la salida fue similar a la siguiente:
+```Shell
+Conectando con el servidor...
+Conexión establecida.
+IP del cliente: 172.29.43.71
+Puerto local del cliente: 54986
+IP del servidor: 172.29.43.71
+Puerto del servidor: 5000
+Evento enviado: IP=172.29.43.71;PROTOCOLO=TCP;PUERTO=54986;TIPO=CONEXION
+Respuesta del servidor: OK: evento recibido por el servidor
+```
+
+El resultado confirma que el cliente pudo conectarse al servidor, obtener los datos de su conexión, enviar el evento simulado y recibir una respuesta.
+
+> [!Note]
+> En este caso, la IP local del cliente y la IP del servidor aparecen iguales porque el cliente se ejecutó dentro del mismo entorno Ubuntu y utilizó la dirección de WSL2 para conectarse. Esto no significa que los dos procesos sean el mismo: cada uno utiliza su propio socket y puerto dentro de la comunicación.
+
+###### Ejecutar el cliente desde Windows mediante IntelliJ IDEA
+
+Para verificar la comunicación entre distintos entornos operativos, se ejecuta el servidor en Ubuntu y el cliente desde Windows mediante IntelliJ IDEA.
+
+El servidor debe permanecer activo en su terminal. En IntelliJ IDEA se ejecuta la clase `red.Cliente`, utilizando la configuración de ejecución del proyecto.
+
+La salida obtenida fue:
+
+```powershell
+Conectando con el servidor...
+Conexión establecida.
+IP del cliente: 172.29.32.1
+Puerto local del cliente: 61774
+IP del servidor: 172.29.43.71
+Puerto del servidor: 5000
+Evento enviado: IP=172.29.32.1;PROTOCOLO=TCP;PUERTO=61774;TIPO=CONEXION
+Respuesta del servidor: OK: evento recibido por el servidor
+
+Process finished with exit code 0
+```
+
+En esta prueba, el cliente se ejecutó en Windows y utilizó la dirección `172.29.32.1` como dirección local de origen, mientras que el servidor se encontraba en Ubuntu, accesible mediante `172.29.43.71:5000`.
+
+El mensaje `Process finished with exit code 0` indica que la ejecución del cliente terminó correctamente, sin que se reportara un error de ejecución.
+
+###### Ejecutar el cliente desde Windows mediante VS Code (Python)
+
+Se abrió una terminal de Windows en VS Code, en la carpeta donde se guardo `cliente.py` y se ejecuto:
+
+```powershell
+py cliente.py
+```
+
+###### Verificación de los mensajes recibidos por el servidor
+
+Mientras se ejecutan los clientes, la terminal del servidor muestra las conexiones entrantes y los eventos recibidos. Por ejemplo:
+
+```Shell
+Servidor escuchando en el puerto 5000
+Cliente conectado: /172.29.32.1:61774
+Evento recibido: IP=172.29.32.1;PROTOCOLO=TCP;PUERTO=61774;TIPO=CONEXION
+```
+
+La primera línea confirma que el servidor continúa escuchando en el puerto configurado. La segunda muestra la dirección y el puerto de origen observados por el servidor para esa conexión. La tercera presenta el mensaje de evento enviado por el cliente.
+
+La IP y el puerto de origen que muestra el servidor permiten identificar el extremo de la conexión TCP que observa la aplicación. Por su parte, los campos `IP` y `PUERTO` incluidos en el evento son datos transmitidos en el mensaje. En esta prueba coinciden con los valores obtenidos por el cliente, pero ambos conceptos deben distinguirse en el diseño del sistema.
+
 
 # Ruta del Proyecto 
 

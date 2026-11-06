@@ -48,7 +48,127 @@ En el `pom.xml` se pueden declarar las dependencias, la versión de Java, los co
 
 Crear un proyecto JavaFX seleccionando Maven como sistema de construcción es recomendable para empezar.
 
-# Cómo iniciar un proyecto de JavaFX en IntelliJ IDEA (con Maven)
+# Iniciar un proyecto de Java en IntelliJ (con Maven)
+#### 1. Crear un proyecto Maven vacío
+
+- Abrír IntelliJ IDEA.
+- Seleccionar New Project.
+- En el menú de la izquierda seleccionar Java.
+- Configurar los siguientes parámetros:
+
+<div style="text-align: center;">  
+<img src="Pasted%20image%2020261104172103.png" width="500">  
+</div>
+<div style="text-align: center; color: #555555;">
+<b>Imagen 1</b>. Nuevo proyecto. https://www.jetbrains.com/
+</div>
+
+- Presionar Create.
+
+#### 2. Configurar Maven para JavaFX
+
+Cuando IntelliJ termine de crear el proyecto, tendrás una estructura similar a esta:
+
+```
+MiVideojuego/
+│
+├── .idea/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   └── resources/
+│   │
+│   └── test/
+│       └── java/
+│
+└── pom.xml
+```
+
+Abrir `pom.xml` y reemplaza su contenido por lo siguiente:
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.videojuego</groupId>
+    <artifactId>MiVideojuego</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <javafx.version>21.0.2</javafx.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.videojuego.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+```
+
+Esta configuración utiliza Java 17 y JavaFX 21.0.2, una combinación compatible.
+
+- Maven descargará las bibliotecas necesarias cuando se actualice el proyecto.
+
+#### 3. Crear clases
+
+Antes de programar cualquier clase, se crea el paquete `com.videojuego`
+
+Hacer clic derecho sobre la carpeta `java`: **New → Package** 
+
+Escribir:
+```
+com.videojuego
+```
+
+Después, dentro de ese paquete, se podrán crear las clases necesarias.
+
+Ejemplo de un proyecto para la programación de un videojuego:
+```
+MiVideojuego/
+│
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── com/
+│       │       └── videojuego/
+│       │           ├── Main.java
+│       │           ├── Position.java
+│       │           ├── Player.java
+│       │           ├── Enemy.java
+│       │           └── Game.java
+│       │
+│       └── resources/
+│
+└── pom.xml
+```
+
+# Iniciar un proyecto de JavaFX en IntelliJ IDEA (con Maven)
 
 ### Paso 1: Crear el proyecto en IntelliJ IDEA
 

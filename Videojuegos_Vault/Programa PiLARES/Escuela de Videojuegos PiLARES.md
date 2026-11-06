@@ -1,5 +1,3 @@
-# Escuela de Videojuegos PiLARES
-
 Escuela de Videojuegos PILARES es un espacio dentro de PILARES, destinado a que niñas, niños, jóvenes y personas adultas puedan aprender el proceso completo de creación de un videojuego, desde la idea inicial hasta un producto jugable.
 
 Escuela de Videojuegos integraría programación, arte, diseño, narrativa, música, producción y conocimientos técnicos para construir experiencias interactivas completas.

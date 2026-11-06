@@ -1,4 +1,16 @@
 
+[MÓDULO 1](#MÓDULO%201)
+[Introducción a la Programación y al Desarrollo de Videojuegos](#Introducción%20a%20la%20Programación%20y%20al%20Desarrollo%20de%20Videojuegos)
+	[Unidad 1. ¿Qué es un videojuego?](#Unidad%201.%20¿Qué%20es%20un%20videojuego?)
+	[Unidad 2. Introducción a Java](#Unidad%202.%20Introducción%20a%20Java)
+	[Unidad 3. Introducción a la POO](#Unidad%203.%20Introducción%20a%20la%20POO)
+	[Unidad 4. Modelado del videojuego](#Unidad%204.%20Modelado%20del%20videojuego)
+
+
+
+
+
+
 # Curso: Desarrollo de Videojuegos en Java con JavaFX
 
 > [!Note]
@@ -859,112 +871,395 @@ public class Conversor {
 
 #### Temas
 
-¿Qué es un objeto?
+- ¿Qué es un objeto?
+- ¿Qué es una clase?
+- POO
+	- Encapsulamiento
+	- Abstracción
+	- Herencia
+	- Polimorfismo
 
-¿Qué es una clase?
+La **Programación Orientada a Objetos (POO)** es un paradigma de programación que organiza el software a partir de objetos que representan entidades del mundo real o elementos de un sistema digital. Este enfoque facilita el diseño de programas complejos mediante la división del problema en componentes más pequeños, reutilizables y fáciles de mantener. En el desarrollo de videojuegos, la POO resulta especialmente útil porque permite modelar personajes, enemigos, proyectiles, escenarios, inventarios y cualquier otro elemento del juego como objetos independientes que interactúan entre sí. Lenguajes como Java fueron diseñados para aprovechar las ventajas de este paradigma, convirtiéndolo en una herramienta fundamental para la creación de videojuegos modernos.
 
-Relación entre:
+### ¿Qué es un objeto?
+
+Un **objeto** es una entidad que posee características propias, denominadas atributos, y comportamientos, representados mediante métodos. Los objetos son las unidades fundamentales de la Programación Orientada a Objetos y pueden representar elementos reales o conceptuales dentro de una aplicación. En el contexto de los videojuegos, un objeto puede representar a un jugador, un enemigo, una moneda, una plataforma o cualquier elemento con el que se interactúe durante la partida. Cada objeto mantiene su propio estado y puede ejecutar acciones específicas de acuerdo con su propósito dentro del juego.
+
+**Ejemplo:**
+
+Un personaje de un videojuego puede tener:
+- Nombre: "Mario"
+- Vidas: 3
+- Posición X: 100
+- Posición Y: 200
+
+Y realizar acciones como:
+- Moverse
+- Saltar
+- Atacar
+
+### ¿Qué es una clase?
+
+Una **clase** es una plantilla o molde que define la estructura y comportamiento que tendrán los objetos creados a partir de ella. La clase especifica qué atributos y métodos poseerán sus instancias, permitiendo crear múltiples objetos con características similares. Desde la perspectiva del desarrollo de videojuegos, una clase puede utilizarse para definir un tipo de personaje, enemigo o elemento interactivo que posteriormente se utilizará múltiples veces dentro del juego.
+
+**Ejemplo en Java:**
 ```Java
-Clase → Molde
-Objeto → Instancia
+public class Jugador {
+
+    String nombre;
+    int vidas;
+
+    void saltar() {
+        System.out.println("El jugador salta");
+    }
+}
 ```
 
-#### Los 4 pilares de la POO
+La clase define cómo será cualquier objeto de tipo **Jugador**.
 
-Primera introducción.
+### Relación entre Clase y Objeto
 
-##### Encapsulamiento
+La relación entre una clase y un objeto puede entenderse mediante la analogía de un molde y una figura creada a partir de él.
+
+#### Clase → Molde
+
+Una clase define las características generales que tendrán los objetos.
+
+**Ejemplo:**
+```Java
+public class Enemigo {
+	int vida; // Atributo
+		
+    void recibirDanio(int danio) { // Método
+        vida -= danio;
+    }
+}
+```
+
+- **Atributo:** 
+	- Los **atributos** son variables declaradas dentro de una clase que representan las características o el estado de un objeto. En un videojuego, los atributos permiten almacenar información relevante sobre personajes, enemigos, proyectiles o cualquier elemento interactivo.
+
+- **Método**: es un bloque de código definido dentro de una clase que representa una acción o comportamiento, como atacar, saltar o recibir daño.
+
+Esta clase describe cómo debe ser cualquier enemigo del videojuego.
+
+#### Objeto → Instancia
+
+Un objeto es una instancia concreta creada a partir de una clase. Cada instancia posee valores propios para sus atributos.
+
+**Ejemplo:**
+```Java
+Enemigo enemigo1 = new Enemigo();
+Enemigo enemigo2 = new Enemigo();
+
+enemigo1.vida = 100;
+enemigo2.vida = 50;
+```
+
+| **Elemento**    | **Definición**                                                      |
+| --------------- | ------------------------------------------------------------------- |
+| `Enemigo`       | Clase que define la estructura y el comportamiento de los enemigos. |
+| `enemigo1`      | Variable de referencia que apunta al primer objeto.                 |
+| `new`           | Palabra reservada que crea una nueva instancia de la clase.         |
+| `Enemigo()`     | Llamada al constructor de la clase para inicializar el objeto.      |
+| `enemigo2`      | Variable de referencia que apunta al segundo objeto.                |
+| `enemigo1.vida` | Acceso al atributo `vida` del primer enemigo.                       |
+| `100` y `50`    | Valores asignados al atributo `vida` de cada objeto.                |
+Aunque ambos objetos pertenecen a la misma clase, cada uno posee un estado independiente.
+
+##### Constructor
+
+Es un bloque especial de una clase que se ejecuta al crear un objeto y permite inicializar sus atributos. Tiene el mismo nombre que la clase y no posee un tipo de retorno.
+
+Ejemplo en Java:
+```Java
+public class Enemigo {
+    int vida;
+
+    public Enemigo(int vidaInicial) {
+        vida = vidaInicial;
+    }
+}
+```
+
+Para crear un objeto e inicializar su vida:
+```Java
+Enemigo enemigo1 = new Enemigo(100);
+```
+
+En este caso, el constructor asigna `100` al atributo `vida` del enemigo al momento de crearlo.
+### Analogía aplicada a videojuegos
+
+Si una clase representa el diseño de un enemigo tipo "Zombie", cada zombie que aparece en el mapa durante la partida corresponde a un objeto diferente creado a partir de esa misma clase.
+
+### Los Cuatro Pilares de la Programación Orientada a Objetos
+
+Los cuatro pilares de la POO constituyen los principios fundamentales que permiten construir software modular, reutilizable y mantenible. En esta unidad se realizará una primera aproximación conceptual a cada uno de ellos, ya que serán estudiados con mayor profundidad en unidades posteriores.
+
+#### 1. Encapsulamiento
+
+El **encapsulamiento** consiste en proteger los datos internos de un objeto para evitar que sean modificados de manera inadecuada desde otras partes del programa. Para lograrlo, Java proporciona modificadores de acceso como `private`, que restringen el acceso directo a los atributos.
+
+> [!Note]
+> Los modificadores de acceso en Java son palabras reservadas que establecen el nivel de visibilidad de los atributos, métodos y otros elementos de una clase. Su finalidad es controlar desde qué partes del programa se puede acceder a ellos, favoreciendo la encapsulación y la organización del código.
+>
+Java cuenta con cuatro niveles de acceso: `public`, `protected`, `private` y el _acceso por defecto_, también denominado package-private, que se obtiene cuando no se especifica ningún modificador.
+>
+El modificador `public` permite acceder al elemento desde cualquier clase que tenga acceso a él. `protected` permite el acceso desde clases del mismo paquete y desde clases que heredan de la clase que declara el elemento, incluso si estas se encuentran en otro paquete, sujeto a las reglas de acceso de Java. `private` restringe el acceso directo al elemento a la propia clase en la que está declarado. Por último, el acceso por defecto permite acceder al elemento únicamente desde clases pertenecientes al mismo paquete.
+>
+Estos modificadores pueden utilizarse tanto en atributos como en métodos. Por ejemplo, en el desarrollo de videojuegos, un atributo `vida` podría declararse como `private` para evitar que otras clases lo modifiquen directamente, mientras que un método `recibirDanio()` podría declararse como `public` para permitir que otros objetos soliciten esa acción. De esta manera, se controla cómo interactúan los componentes del videojuego y se protege la integridad de sus datos.
+
+En el desarrollo de videojuegos, el encapsulamiento permite proteger información sensible de un personaje, como su posición, salud o puntuación, evitando alteraciones incorrectas que puedan producir errores en la lógica del juego.
+
+**Ejemplo:**
+```Java
+public class Jugador {
+    private int x;
+    private int y;
+}
+```
+
+En este caso, las coordenadas del jugador están protegidas y no pueden ser modificadas directamente desde otras clases.
+
+Puede imaginarse que el encapsulamiento actúa como una barrera de seguridad que controla cómo interactúan los distintos componentes del videojuego.
+
+#### 2. Abstracción
+
+La **abstracción** consiste en representar los aspectos esenciales de un objeto ignorando los detalles innecesarios para un contexto determinado. Gracias a la abstracción, es posible modelar elementos complejos mediante estructuras más simples y comprensibles.
+
+En el desarrollo de videojuegos, la abstracción permite representar objetos reales mediante clases. Por ejemplo, un personaje dentro del juego no necesita incluir absolutamente todas las características de una persona real; únicamente aquellas que son relevantes para la mecánica del juego, como posición, velocidad, puntos de vida o capacidad de ataque.
+
+**Ejemplo:**
+```Java
+public class Personaje {
+    String nombre;
+    int vida;
+    int velocidad;
+}
+```
+
+Esta clase representa únicamente las características necesarias para el funcionamiento del videojuego.
+
+##### Ejemplo conceptual
+
+Un automóvil real posee miles de componentes mecánicos. En un videojuego de carreras podría representarse únicamente mediante atributos como:
+
+- Velocidad
+- Combustible
+- Posición
+- Estado del vehículo
+
+La abstracción permite simplificar la realidad para facilitar su implementación en software.
+
+#### 3. Herencia
+
+La **herencia** es un mecanismo que permite crear nuevas clases a partir de otras existentes, reutilizando atributos y comportamientos ya definidos. Gracias a este principio es posible evitar la duplicación de código y establecer relaciones jerárquicas entre entidades similares.
+
+Dentro de un videojuego es común encontrar múltiples personajes que comparten características generales. Por ejemplo, un héroe, un enemigo y un comerciante pueden tener nombre, posición y puntos de vida. La herencia permite definir estas características comunes en una clase base y reutilizarlas posteriormente.
+
+**Ejemplo conceptual:**
+```Text
+Personaje
+│
+├── Jugador
+├── Enemigo
+└── NPC
+```
+
+> [!Note]
+> En esta unidad aún no se implementará técnicamente la herencia; sin embargo, resulta importante comprender que este mecanismo permite construir jerarquías de clases que reflejan las relaciones existentes entre los elementos de un videojuego.
+
+#### 4. Polimorfismo
+
+El **polimorfismo** es la capacidad que tienen distintos objetos de responder de manera diferente a una misma acción. Este principio permite que elementos relacionados compartan una interfaz común mientras implementan comportamientos específicos según sus características particulares.
+
+En el desarrollo de videojuegos, diversos personajes pueden ejecutar una misma acción general, como atacar o moverse, pero cada uno puede realizarla de manera distinta. Por ejemplo, un arquero dispara flechas, un mago lanza hechizos y un guerrero utiliza una espada; sin embargo, todos están ejecutando la acción "atacar".
+
+
+---
+
+## Unidad 4. Modelado del videojuego
+
+Antes de comenzar a programar un videojuego es necesario realizar un proceso de **modelado**, cuyo propósito consiste en identificar los elementos que existirán dentro del sistema y definir cómo se relacionarán entre sí. En Ingeniería de Software, el modelado permite transformar una idea o problema en una representación estructurada que facilite su implementación mediante código. En el desarrollo de videojuegos, esta etapa resulta fundamental porque ayuda a identificar los objetos, reglas y comportamientos que conformarán la experiencia de juego. Para el caso de _Snake_, antes de escribir algoritmos complejos, es conveniente preguntarse: **¿qué objetos existen en nuestro juego?**. A partir de esta pregunta se identifican tres elementos principales: **Snake**, que representa al jugador; **Food**, que representa la comida que debe consumir la serpiente; y **Position**, que representa la ubicación de los elementos dentro del tablero.
+
+### Análisis inicial del videojuego Snake
+
+Desde una perspectiva orientada a objetos, el videojuego _Snake_ puede modelarse como un conjunto de entidades que interactúan constantemente durante la ejecución del juego. La serpiente necesita conocer dónde se encuentra dentro del tablero, la comida requiere una posición específica para aparecer y ambos elementos deben compartir una forma común de representar coordenadas. Este análisis permite identificar responsabilidades claras para cada clase y construir una base sólida sobre la cual se desarrollarán posteriormente las mecánicas del videojuego.
+
+```Text
+Snake
+│
+└── tiene una Position
+
+Food
+│
+└── tiene una Position
+
+Position
+├── x
+└── y
+```
+
+### Clase Position
+
+La clase **Position** constituye el primer contacto formal del estudiante con la Programación Orientada a Objetos aplicada a videojuegos. El objetivo es representar una ubicación dentro del tablero mediante coordenadas. Gracias a esta clase, cualquier objeto del juego que necesite una posición podrá reutilizar la misma estructura de datos.
+
+#### Atributos
+
+Para la clase `Position`, los atributos representan las coordenadas horizontales y verticales dentro del tablero.
+
+```Java
+public class Position {
+	private int x;
+	private int y;
+}
+```
+
+En este ejemplo:
+
+- `x` representa la coordenada horizontal.
+- `y` representa la coordenada vertical.
+
+Si el tablero fuera una cuadrícula, una posición `(5,3)` significaría que el objeto se encuentra en la columna 5 y fila 3.
+
+### Constructor
+
+Un constructor es un bloque especial de código perteneciente a una clase cuya función consiste en **inicializar los atributos de un objeto cuando este es creado**. _Su nombre debe coincidir exactamente con el de la clase_ y, a diferencia de los métodos convencionales, no tiene un tipo de retorno. En términos sencillos, funciona como una configuración inicial que se realiza automáticamente al crear un objeto, estableciendo los valores con los que comenzará a funcionar.
+
+En el desarrollo de videojuegos, los constructores permiten que los objetos aparezcan con valores iniciales válidos desde el momento en que son creados. Por ejemplo, al crear un enemigo, su constructor puede establecer automáticamente su cantidad de vida, velocidad, nombre y nivel de dificultad. De esta manera, _cada objeto comienza con las características necesarias para participar en el videojuego_, sin tener que asignar sus valores individualmente después de crearlo.
+
+**Ejemplo:**
+```Java
+public class Position {
+
+    private int x;
+    private int y;
+
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+```
+
+Creación de un objeto:
+```Java
+Position posicionInicial = new Position(5, 3);
+```
+
+La palabra clave `this` hace referencia al propio objeto con el que se está trabajando dentro de una clase. Permite identificar sus atributos y métodos, diferenciarlos de otras variables y acceder a sus propios elementos. _Se utiliza especialmente en los constructores_ cuando se necesita distinguir un atributo de la clase de un parámetro que tiene el mismo nombre. En términos sencillos, `this` significa **este objeto**, es decir, el objeto actual que está ejecutando una instrucción.
+
+### Getters
+
+Los getters son _métodos públicos_ utilizados para consultar u obtener el valor de los atributos privados de una clase. Funcionan como un medio de acceso controlado a la información de un objeto, permitiendo que otras partes del programa puedan conocer sus datos sin necesidad de acceder directamente a las variables que los almacenan. Generalmente, su nombre comienza con la palabra `get`, seguida del nombre del atributo que se desea consultar.
+
+Forman parte de las buenas prácticas de encapsulamiento, ya que permiten proteger la información interna de un objeto y controlar la manera en que otros componentes del programa pueden consultarla. Por ejemplo, en un videojuego, un método `getVida()` permite conocer cuántos puntos de vida tiene un personaje sin permitir que otras clases modifiquen directamente ese valor.
+
+**Ejemplo:**
+```Java
+public class Position {
+
+    private int x;
+    private int y;
+
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+}
+```
+
+Uso:
+```Java
+Position posicion = new Position(10, 4);
+
+System.out.println(posicion.getX());
+System.out.println(posicion.getY());
+```
+
+### Encapsulamiento
+
+En videojuegos, el encapsulamiento evita que otros componentes modifiquen accidentalmente información crítica, como la posición de un personaje o su cantidad de vidas.
 
 ```Java
 private int x;
 private int y;
 ```
 
-##### Abstracción
+La palabra reservada `private` impide que otras clases accedan directamente a estos atributos.
 
-Representar objetos reales mediante clases.
+### Clase Direction
 
-##### Herencia
+Durante el desarrollo de Snake, la serpiente solamente puede desplazarse en cuatro direcciones: arriba, abajo, izquierda y derecha. Una forma adecuada de representar y controlar este comportamiento es mediante una enumeración o **enum**, que permite establecer las opciones de movimiento disponibles para el personaje.
 
-Introducción conceptual.
+Un **enum** es un tipo especial de dato que permite definir un conjunto fijo y limitado de valores constantes. A diferencia de una variable convencional, que puede almacenar diferentes valores dentro de su tipo de dato, una enumeración establece previamente las opciones permitidas. Esto facilita la organización del código, mejora su legibilidad y reduce la posibilidad de introducir valores incorrectos o no contemplados durante el desarrollo.
 
-##### Polimorfismo
+En el caso de Snake, podemos crear una enumeración llamada `Direccion` que contenga únicamente las cuatro direcciones posibles. De esta manera, cuando necesitemos modificar el movimiento de la serpiente, podremos utilizar uno de esos valores en lugar de escribir textos o números que representen cada dirección. Esto permite que el programa identifique claramente hacia dónde debe desplazarse el personaje y facilita la administración de su comportamiento.
 
-Introducción conceptual.
-
-**Nota:** todavía no se implementan completamente.
-
----
-
-## Unidad 4. Modelado del videojuego
-
-Antes de escribir código se modela Snake.
-
-#### Pregunta guía
-
-¿Qué objetos existen en nuestro juego?
-
-Resultado:
-- Snake
-- Food
-- Position
-
-#### Desarrollo del proyecto
-
-#### Clase Position
-
-Primer contacto con POO.
+#### enum
 
 ```Java
-public class Position
+public enum Direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
 ```
 
-Temas:
+Uso:
+```Java
+Direction direccionActual = Direction.RIGHT;
+```
 
-- Atributos.
-- Constructor.
-- Getters.
-- Encapsulamiento.
+Aplicación en Snake:
+```Java
+if (direccionActual == Direction.UP) {
+    System.out.println("La serpiente se mueve hacia arriba");
+}
+```
 
-#### Clase Direction
+La ventaja de utilizar un enum es que se evita escribir cadenas de texto como `"arriba"` o `"derecha"`, reduciendo errores tipográficos y facilitando el mantenimiento del código.
 
-Primer enum.
+### Clase Food
+
+La clase **Food** representa el alimento que la serpiente debe consumir para crecer y aumentar la puntuación del jugador.
+
+Desde la perspectiva del modelado orientado a objetos, la comida posee una posición específica dentro del tablero. Para ello se reutiliza la clase `Position` previamente definida.
+
+#### Composición básica
+
+La composición es una relación entre clases en la que un objeto contiene uno o varios objetos de otras clases como parte de su propia estructura. En términos sencillos, significa que un objeto está formado por otros objetos que le permiten tener características o funcionalidades específicas. De esta manera, en lugar de concentrar toda la información y el comportamiento en una sola clase, podemos dividir las responsabilidades en diferentes clases que trabajan conjuntamente.
+
+En este tipo de relación, los objetos que forman parte de otro se consideran componentes de su estructura. Por ejemplo, en un videojuego como Snake, un objeto `Food` (comida) necesita conocer su ubicación dentro del escenario. Para representar esa ubicación, puede utilizar un objeto `Position` (posición), que almacena las coordenadas donde debe aparecer la comida.
 
 ```Java
-public enum Direction
+public class Food {
+    private Position position;
+}
 ```
 
-#### Clase Food
+En este ejemplo, `Food` contiene un atributo de tipo `Position`, lo que significa que cada objeto de comida tiene asociada una posición dentro del escenario. En lugar de almacenar directamente las coordenadas `x` e `y` dentro de `Food`, se utiliza otra clase especializada en administrar posiciones.
 
-Composición básica.
+La frase **Food tiene una Positio** describe precisamente esta relación de composición. Este enfoque permite reutilizar clases, organizar mejor el código y facilitar el mantenimiento del videojuego, ya que cada clase se encarga de una responsabilidad específica.
 
-```Java
-private Position position;
-```
+> [!Note]
+> En sentido estricto, la composición implica que el objeto principal controla el ciclo de vida de sus componentes; es decir, estos forman parte de él y dependen de su existencia. Si únicamente existe una referencia a otro objeto sin esa dependencia, podría tratarse de una _asociación_ o _agregación_, dependiendo del contexto.
 
-#### Clase GameConfig
 
-Introducción a constantes.
 
-```Java
-public static final
-```
 
----
 
-#### Entregable del módulo
 
-```
-config
-└── GameConfig
 
-model
-├── Position
-├── Food
-└── Direction
-```
 
-El alumno ya tiene sus primeras clases del juego.
+
 
 ---
 ---
