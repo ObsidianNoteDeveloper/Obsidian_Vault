@@ -11,6 +11,7 @@ La idea es avanzar como lo haría en un proyecto de ingeniería de software:
 [Clases de Java para sockets TCP](#Clases%20de%20Java%20para%20sockets%20TCP)
 [Herramientas y conocimientos técnicos](#Herramientas%20y%20conocimientos%20técnicos)
 [Guía paso a paso: construir el cliente-servidor](#Guía%20paso%20a%20paso%20construir%20el%20cliente-servidor)
+	[Ejecución y verificación de los programas](#Ejecución%20y%20verificación%20de%20los%20programas)
 [Ruta del Proyecto](#Ruta%20del%20Proyecto)
 
 
