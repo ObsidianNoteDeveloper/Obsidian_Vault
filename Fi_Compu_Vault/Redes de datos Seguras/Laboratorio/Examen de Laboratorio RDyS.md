@@ -1081,3 +1081,315 @@ Esta es probablemente la sección a la que debes dedicar más tiempo después de
 |`ip route ...`|Configurar ruta estática.|
 |`line vty 0 4`|Configurar acceso remoto.|
 
+# Preguntas que debes poder contestar sin consultar el manual
+
+##### **¿Cuál es la diferencia entre T568-A y T568-B?**
+El orden de los conductores de los pares verde y naranja cambia.
+
+##### **¿Qué configuración utiliza un cable cruzado?**
+T568-A en un extremo y T568-B en el otro.
+
+##### **¿Por qué están trenzados los conductores UTP?**
+Para reducir interferencias electromagnéticas y diafonía.
+
+##### **¿Qué diferencia existe entre UTP y STP?**
+UTP no tiene blindaje metálico y STP sí.
+
+##### **¿Qué norma regula el cableado estructurado?**
+ANSI/TIA 568.
+
+##### **¿Cuáles son los seis subsistemas del cableado estructurado?**
+Horizontal, vertical, área de trabajo, cuarto de telecomunicaciones, cuarto de equipos y entrada de servicios.
+
+##### **¿Cuál es la diferencia entre un equipo activo y uno pasivo?**
+El activo procesa o regenera señales; el pasivo proporciona infraestructura de conexión.
+
+##### **¿En qué capa OSI trabaja un hub?**
+Capa 1.
+
+##### **¿En qué capa OSI trabaja un switch tradicional?**
+Capa 2.
+
+##### **¿Qué es una colisión?**
+La interferencia que ocurre cuando dos dispositivos transmiten simultáneamente en un medio compartido.
+
+##### **¿Qué diferencia existe entre Half Duplex y Full Duplex?**
+Half Duplex transmite o recibe alternativamente; Full Duplex realiza ambas acciones simultáneamente.
+
+##### **¿Qué es una dirección MAC?**
+Identificador de enlace asociado a una interfaz de red.
+
+##### **¿Qué función tiene una máscara de red?**
+Distingue la porción de red y la porción de host de una dirección IP.
+
+##### **¿Qué función tiene DNS?**
+Resolver nombres de dominio a direcciones IP.
+
+##### **¿Qué función tiene DHCP?**
+Asignar automáticamente parámetros de configuración IP.
+
+##### **¿Qué hace el comando ipconfig /all?**
+Muestra información detallada de la configuración de red de Windows.
+
+##### **¿Qué hace ip addr?**
+Muestra las direcciones IP de las interfaces de Linux.
+
+##### **¿Qué protocolo utiliza ping?**
+ICMP.
+
+##### **¿Qué función tiene ARP?**
+Resolver una dirección IPv4 a una dirección MAC en la red local.
+
+##### **¿Qué hace arp -a?**
+Muestra la tabla ARP.
+
+##### **¿Qué función tiene Wireshark?**
+Capturar y analizar paquetes de red.
+
+##### **¿Qué diferencia existe entre encaminamiento estático y dinámico?**
+El estático se configura manualmente y el dinámico aprende rutas mediante protocolos.
+
+##### **¿Qué hace no shutdown en Cisco?**
+Habilita administrativamente una interfaz.
+
+##### **¿Qué es una ruta estática?**
+Una ruta configurada manualmente por el administrador.
+
+##### **¿Cuál es la diferencia entre TCP y UDP?**
+TCP ofrece comunicación confiable y orientada a conexión; UDP no establece conexión ni garantiza entrega.
+
+##### **¿Qué es un socket?**
+Un punto de comunicación entre procesos, identificado mediante direcciones y puertos.
+
+##### **¿Qué significan SYN, SYN-ACK y ACK?**
+Los tres pasos del establecimiento de conexión TCP.
+
+##### **¿Qué puerto utiliza SSH?**
+TCP 22, por defecto.
+
+##### **¿Cuál es la diferencia entre clave pública y privada?**
+La pública se comparte; la privada se mantiene protegida por su propietario.
+
+##### **¿Qué significan DORA y cuáles son sus pasos?**
+Discover, Offer, Request y Acknowledge: el proceso de asignación DHCP.
+
+##### Fin de cuestionario
+
+1B, 2C, 3B, 4B, 5A, 6B, 7A, 8D, 9A, 10B, 11C, 12B, 13A, 14A, 15A, 16C, 17B, 18C, 19C, 20B, 21B, 22C, 23B, 24B, 25A, 26B, 27C, 28B, 29A, 30A
+
+3C
+15B
+19A
+23A
+30C
+
+---
+
+**Comandos de Linux**
+El comando `ip addr` permite consultar las direcciones IP de las interfaces de red.
+No confundas estos comandos:
+
+| Comando    | Función                                |
+| ---------- | -------------------------------------- |
+| `ip addr`  | Consultar direcciones IP e interfaces. |
+| `ip link`  | Consultar información de interfaces.   |
+| `ip route` | Consultar la tabla de rutas.           |
+| `ping`     | Comprobar conectividad.                |
+
+---
+
+**Tabla de enrutamiento en Windows**
+El comando `route print` muestra la tabla de rutas IP de Windows.
+En cambio, `arp -a` muestra la tabla de correspondencias entre direcciones IP y MAC.
+
+---
+
+**Consulta de interfaces en Cisco**
+El comando:
+```
+show ip interface brief
+```
+permite consultar rápidamente las interfaces, sus direcciones IP y su estado.
+
+Por otro lado:
+```
+show running-config
+```
+muestra la configuración activa del router.
+
+---
+
+**Capa de presentación del modelo OSI**
+La capa 6 se relaciona con la representación de los datos, incluyendo:
+
+- Traducción de formatos.
+- Compresión y descompresión.
+- Cifrado y descifrado.
+
+El enrutamiento de paquetes corresponde a la capa 3 (red).
+
+---
+
+1B, 2C, 3B, 4C, 5B, 6A, 7B, 8C, 9A, 10B, 11A, 12C, 13B, 14B, 15A, 16D, 17A, 18A, 19B, 20A, 21B, 22C, 23B, 24B, 25C, 26A, 27B, 28B, 29C, 30A
+
+---
+
+**Pregunta 5. Dirección 169.254.x.x**
+
+**5.** En Debian se ejecuta:
+
+```
+ifconfig
+```
+
+El resultado muestra que la interfaz `enp0s3` tiene la dirección `169.254.10.25`. ¿Qué situación podría explicar esta dirección?
+
+B) El equipo tiene configurada correctamente una dirección del servidor DHCP.
+
+C) El equipo tiene una dirección de autoconfiguración local, posiblemente porque no obtuvo una asignación DHCP.
+
+Tu respuesta: **B** · Correcta: **C**
+
+Una dirección `169.254.x.x` pertenece al rango de direcciones link-local (APIPA). Windows puede autoconfigurarse con una dirección de este tipo cuando no consigue obtener una dirección mediante DHCP.
+
+**Qué debes recordar:** si un cliente tiene una dirección `169.254.x.x`, investiga primero si puede comunicarse con el servidor DHCP.
+
+---
+
+**Pregunta 6. Renovación DHCP**
+
+**6.** Un técnico necesita renovar la configuración IP de un cliente Windows porque sospecha que recibió parámetros incorrectos del servidor DHCP. ¿Qué secuencia debe ejecutar?
+
+A)
+
+```
+ipconfig /renew
+ipconfig /release
+```
+
+B)
+
+```
+ipconfig /release
+ipconfig /renew
+```
+
+Tu respuesta: **A** · Correcta: **B**
+
+La secuencia correcta es:
+
+```
+ipconfig /release
+ipconfig /renew
+```
+
+- `/release`: libera la configuración DHCP actual.
+    
+- `/renew`: solicita una nueva configuración al servidor DHCP.
+
+Invertir el orden no cumple el procedimiento solicitado.
+
+---
+
+**Pregunta 7. Selección de rutas**
+
+**7.** Un router presenta la siguiente tabla de enrutamiento:
+
+|Destino|Máscara|Siguiente salto|
+|---|---|---|
+|192.168.1.0|255.255.255.0|Directamente conectada|
+|192.168.2.0|255.255.255.0|Directamente conectada|
+|0.0.0.0|0.0.0.0|192.168.1.1|
+
+Un paquete tiene como destino `192.168.2.50`. ¿Qué ruta debe utilizar el router?
+
+B) La ruta `192.168.1.0/24`.
+
+C) La ruta `192.168.2.0/24`.
+
+Tu respuesta: **B** · Correcta: **C**
+
+El destino es `192.168.2.50`. La tabla tiene una ruta directamente conectada:
+
+`192.168.2.0/24`
+
+Esa es la ruta que debe utilizarse porque incluye la dirección destino.
+
+**Regla importante:** el router selecciona la ruta más específica que coincida con el destino (longest prefix match).
+
+---
+
+**Pregunta 9. Comando route print**
+
+Incorrecta
+
+Tu respuesta: **A** · Correcta: **B**
+
+```
+route print
+```
+
+Muestra la tabla de enrutamiento de Windows: rutas de red, destinos, máscaras, gateways e interfaces.
+
+No muestra las asociaciones IP-MAC. Para eso se utiliza:
+
+```
+arp -a
+```
+
+**Pregunta 10. Resolución de direcciones**
+
+Incorrecta
+
+Tu respuesta: **B** · Correcta: **C**
+
+El protocolo **ARP** permite resolver una dirección IPv4 a una dirección MAC dentro del segmento de red local.
+
+Recuerda la diferencia:
+
+|Protocolo|Función|
+|---|---|
+|ARP|IP → MAC|
+|DNS|Nombre de dominio → IP|
+|DHCP|Asignación de parámetros IP|
+|ICMP|Mensajes de control y diagnóstico|
+
+**Pregunta 16. show ip interface brief**
+
+Incorrecta
+
+Tu respuesta: **D** · Correcta: **C**
+
+```
+show ip interface brief
+```
+
+Presenta un resumen de las interfaces del router, sus direcciones IP y sus estados.
+
+No muestra la tabla ARP.
+
+Diferencia estos comandos:
+
+|Comando|Información|
+|---|---|
+|`show ip interface brief`|Resumen de interfaces|
+|`show running-config`|Configuración activa|
+|`show ip route`|Tabla de enrutamiento|
+|`show interface`|Detalles de una interfaz|
+
+**Pregunta 18. Interfaz administratively down**
+
+Incorrecta
+
+Tu respuesta: **A** · Correcta: **B**
+
+Si una interfaz aparece como `administratively down`, significa que está deshabilitada administrativamente.
+
+Debes entrar al modo de configuración de interfaz y ejecutar:
+
+```
+Router(config)# interface FastEthernet 0/0
+Router(config-if)# no shutdown
+```
+
+`no shutdown` habilita la interfaz. No debes confundirlo con `ip route`, que sirve para configurar rutas estáticas.
